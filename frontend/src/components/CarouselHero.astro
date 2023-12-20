@@ -1,0 +1,97 @@
+---
+import { Image } from "astro:assets";
+/*
+interface Props {
+	_id: string;
+	title: string;
+	image: string;
+}
+*/
+const { data } = Astro.props;
+const images = import.meta.glob('/src/assets/hero/*.{jpeg,jpg,png,gif}')
+
+var carouselId = "carousel-" + Math.random().toString(16).slice(2)
+---
+<div class="h-full relative">
+	{data.map((el, i) => (
+		<div id=`${carouselId}-slide-${i}` class=`${carouselId}-slide w-full h-full relative hidden`>
+			<Image src={images['/src/assets'+el.image]()} alt={el.title} width="800" class="object-cover w-full h-full" />
+			{ (el.title !== '') &&
+			<div class="absolute top-3/4 font-serif text-brightRed text-xl w-full flex justify-center">
+				<p class="w-fit p-[10px] bg-white bg-opacity-50">
+					{el.title}
+				</p>
+			</div>
+			}
+		</div>
+	))}
+
+	<div class="absolute bottom-0 w-full h-[50px] flex justify-center gap-6">
+		{data.map((el, i) =>
+			<span id=`${carouselId}-bullet-${i}` class=`${carouselId}-bullet w-[8px] h-[8px] rounded-full hover:cursor-pointer bg-white`></span>
+		)}
+	</div>
+
+</div>
+
+<style>
+	.active-bullet {
+		position: relative;
+		background-color: var(--brightRed);
+	}
+	.active-bullet:before {
+		content: '';
+		position: absolute;
+		width: 24px;
+		height: 24px;
+		top: -8px;
+		left: -8px;
+		border: 1px solid var(--brightRed);
+		border-radius: 50px;
+	}
+</style>
+
+<script define:vars={{ data, carouselId }}>
+	let len = data.length;
+	let dots;
+	let active_dot = 0;
+
+	function changeBullet(i = 0) {
+		document.querySelectorAll(`.${carouselId}-slide`).forEach(slide => {
+			slide.classList.add("hidden");
+		})
+		document.querySelector(`#${carouselId}-slide-${i}`).classList.remove("hidden");
+
+		document.querySelectorAll(`.${carouselId}-bullet`).forEach(bullet => {
+			bullet.classList.remove("active-bullet");
+		})
+		document.querySelector(`#${carouselId}-bullet-${i}`).classList.add("active-bullet");
+	}
+
+	for (let i = 0; i < len; i++) {
+		document.querySelector(`#${carouselId}-bullet-${i}`).addEventListener('click', () => {
+			clearInterval(dots);
+			changeBullet(i);
+			//active_dot = i;
+			//startInterval();
+		})
+	}
+
+	function startInterval() {
+		changeBullet(); active_dot++;
+
+		dots = setInterval(function() {
+			changeBullet(active_dot);
+			if (active_dot+1 < len) {
+				active_dot++;
+			} else {
+				active_dot = 0;
+			}
+		}, 3000)
+	}
+	
+	//startInterval()
+	changeBullet()
+
+</script>
+

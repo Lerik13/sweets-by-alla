@@ -1,0 +1,51 @@
+---
+import { Icon } from 'astro-icon';
+import Layout from '../layouts/Layout.astro';
+import Button from '../components/Button.astro';
+import CarouselHero from '../components/CarouselHero.astro';
+import contactData from '../data/contactData';
+//import { BASE_URL } from '../constants';
+type HeadData = {
+	_id: number;
+	title: string;
+	image: string;
+};
+const res = await fetch("http://localhost:5000/api/hero");
+const headData: HeadData[] = await res.json();
+---
+
+<Layout>
+	<div class="lg:container mx-auto p-6 pt-0 h-[40rem] flex flex-col md:flex-row items-center space-y-6 md:space-y-0">
+		<div class="flex flex-col justify-between w-full md:w-1/2 h-[40rem] md:h-full space-y-12 md:space-y-0">
+			<div class="mt-20 flex flex-col space-y-7">
+				<h1 class="text-5xl md:text-6xl font-serif leading-[3rem] md:leading-[4rem]">
+					Delicious cakes &amp;<br>
+					desserts for you!
+				</h1>
+				<p class="leading-[1.5rem]">
+					A large selection of delecious cakes, desserts and pastries.<br>
+					Suitable for both holidays and regular days. Delicious!
+				</p>
+				<div class="flex">
+					<Button text="Shop now" />
+				</div>
+			</div>
+			<div class="flex gap-x-4">
+				<a href=`${contactData.facebook}` target="blank" class="flex justify-center items-center border border-gray-400 w-[40px] h-[40px] rounded-full">
+					<Icon name="jam:facebook" width="26px" class="" />
+				</a>
+				<a href=`${contactData.instagram}` target="blank" class="flex justify-center items-center border border-gray-400 w-[40px] h-[40px] rounded-full">
+					<Icon name="jam:instagram" width="26px" class="" />
+				</a>
+				<a href=`tel:${contactData.phoneValue}` class="flex justify-center items-center border border-gray-400 w-[40px] h-[40px] rounded-full">
+					<Icon name="ri:phone-fill" width="26px" class="" />
+				</a>
+			</div>
+		</div>
+
+		<div class="w-full md:w-1/2 h-[40rem] md:h-full md:overflow-hidden ">
+			<CarouselHero data={headData} />
+		</div>
+	</div>
+
+</Layout>

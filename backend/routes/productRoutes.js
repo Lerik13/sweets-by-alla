@@ -7,7 +7,8 @@ import {
 	updateProduct,
 	deleteProduct,
 	getTopProducts,
-	getProductsByCategory
+	getProductsByCategory,
+	getProductsByCategoryForCatalog
 } from '../controllers/productController.js';
 import { protect, admin } from '../middleware/authMiddleware.js';
 import checkObjectId from '../middleware/checkObjectId.js';
@@ -17,6 +18,7 @@ router.route('/')
 	.post(protect, admin, createProduct);
 router.get('/top', getTopProducts);
 router.get('/category/:category', getProductsByCategory);
+router.get('/catalog/:category', getProductsByCategoryForCatalog);
 router.route('/:id')
 	.get(checkObjectId, getProductById)
 	.put(protect, admin, checkObjectId, updateProduct)

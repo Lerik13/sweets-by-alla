@@ -1,0 +1,82 @@
+:root {
+	--font-sans: "Raleway", sans-serif;
+	--font-serif: "Playfair Display", serif;
+	--brightRed: hsl(343, 95%, 38%);
+	--darkGray: hsl(0, 6%, 6%);
+	--navColor: hsl(343, 86%, 86%);
+	--veryLightGray: hsl(0, 0%, 96%);
+	--bgColor: #fff;
+}
+
+body {
+	color: var(--darkGray);
+}
+
+/* Hamburger Menu */
+.hamburger {
+	cursor: pointer;
+	width: 40px;
+	height: 40px;
+	transition: all 0.25s;
+	position: fixed;
+	top: 24px;
+	right: 26px;
+	z-index: 30;
+	background-color: var(--bgColor);
+	border-radius: 50%;
+}
+
+.hamburger-top,
+.hamburger-middle,
+.hamburger-bottom {
+	position: absolute;
+	top: 12px;
+	left: 8px;
+	width: 24px;
+	height: 2px;
+	background: var(--darkGray);
+	transform: rotate(0);
+	transition: all 0.5s;
+}
+.hamburger-middle {
+	transform: translateY(7px);
+	width: 20px;
+}
+.hamburger-bottom {
+	transform: translateY(14px);
+	width: 16px;
+}
+
+.open {
+	position: fixed;
+	transform: rotate(90deg);
+	transform: translateY(0px);
+}
+.open .hamburger-top {
+	transform: rotate(45deg) translateY(6px) translate(6px);
+	width: 24px;
+}
+.open .hamburger-middle {
+	display: none;
+}
+.open .hamburger-bottom {
+	transform: rotate(-45deg) translateY(6px) translate(-6px);
+	width: 24px;
+}
+/* - for animation - */
+.animate-hide {
+	opacity: 0;
+	filter: blur(5px);
+	transform: translateX(-100%);
+	transition: all 1s;
+}
+.animate-show {
+	opacity: 1;
+	filter: blur(0);
+	transform: translateX(0);
+}
+@media(peferes-reduced-motion) {
+	.animate-hide {
+		transition: none;
+	}
+}

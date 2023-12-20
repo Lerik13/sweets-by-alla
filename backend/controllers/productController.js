@@ -6,7 +6,7 @@ import { Product } from '../models/productModel.js';
 // @route		GET /api/products
 // @access	Public
 const getProducts = asyncHandler(async (req, res) => {
-	const pageSize = 8;
+	const pageSize = process.env.PAGINATION_LIMIT // pagination: how many products show in 1 page
 	const page = Number(req.query.pageNumber) || 1;
 
 	const keyword = req.query.keyword
@@ -109,10 +109,22 @@ const getTopProducts = asyncHandler(async (req, res) => {
 const getProductsByCategory = asyncHandler(async (req, res) => {
 	const category = req.params.category;
 
-	const products = await Product.find({ category: category }).sort({ rating: -1 }).limit(5);
+	const products = await Product.find({ category: category }).sort({ order: 1 });
 	
 	res.status(200).json(products);
 });
+
+// @desc		Get products by category for "Catalog" on main page
+// @route		GET /api/products/category/
+// @access	Public
+const getProductsByCategoryForCatalog = asyncHandler(async (req, res) => {
+	const category = req.params.category;
+
+	const products = await Product.find({ category: category }).sort({ order: 1 }).limit(5);
+	
+	res.status(200).json(products);
+});
+
 
 export {
 	getProducts,
@@ -121,5 +133,6 @@ export {
 	updateProduct,
 	deleteProduct,
 	getTopProducts,
-	getProductsByCategory
+	getProductsByCategory,
+	getProductsByCategoryForCatalog
 }
