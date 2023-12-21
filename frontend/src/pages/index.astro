@@ -6,6 +6,10 @@ import CarouselHero from '../components/CarouselHero.astro';
 import TabCatalog from '../components/TabCatalog.astro';
 import contactData from '../data/contactData';
 import { BASE_URL, HERO_URL } from '../constants';
+import { Image } from "astro:assets";
+import featureImage_1 from "../assets/images/feature1.jpg";
+import featureImage_2 from "../assets/images/feature2.jpg";
+import featureImage_3 from "../assets/images/feature3.jpg";
 
 type HeroData = {
 	_id: number;
@@ -56,8 +60,8 @@ const heroData: HeroData[] = await res.json();
 
 	<!-- Catalog -->
 	<section id="catalog" data-anchor="catalog">
-		<div class="container flex flex-col space-y-6 md:space-y-12 mx-auto mt-10 md:mt-20">
-			<h2 class="font-serif text-4xl md:text-5xl lg:text-5xl whitespace-nowrap pr-2 flex flex-col items-center ">
+		<div class="container flex flex-col space-y-8 md:space-y-12 mx-auto mt-10 md:mt-20">
+			<h2 class="font-serif text-5xl md:text-6xl whitespace-nowrap pr-2 flex flex-col items-center">
 				Catalog
 			</h2>
 			<div 
@@ -129,6 +133,38 @@ const heroData: HeroData[] = await res.json();
 					category="gluten-free dessert"
 					href="/"
 				/>
+			</div>
+		</div>
+	</section>
+
+	<!-- Features Section -->
+	<section id="features" data-anchor="features">
+		<div class="container flex flex-col space-y-8 md:space-y-12 px-6 mx-auto mt-10 md:mt-20">
+			<h2 class="font-serif text-5xl md:text-6xl whitespace-nowrap pr-2 flex flex-col items-center">
+				Our advantages
+			</h2>
+			<div class="flex flex-col md:flex-row gap-10 md:gap-4 lg:gap-[4rem] xl:gap-[6rem] items-center md:items-end justify-center">
+				<div class="flex flex-col space-y-3 items-center md:w-[14rem]">
+					<Image src={featureImage_1} alt="advantage 1" format="avif" class="rounded-full w-[13rem]" />
+					<h6 class="font-semibold text-lg">High quality</h6>
+					<p class="px-6 text-center">
+						Handmade cake & natural<br> ingredients
+					</p>
+				</div>
+				<div class="flex flex-col space-y-3 items-center md:w-[17rem]">
+					<Image src={featureImage_2} alt="advantage 1" format="avif" class="rounded-full w-[16rem]" />
+					<h6 class="font-semibold text-lg">Beautiful decor</h6>
+					<p class="px-6 text-center">
+						Variety theme decoration<br> for special occasion
+					</p>
+				</div>
+				<div class="flex flex-col space-y-3 items-center md:w-[14rem]">
+					<Image src={featureImage_3} alt="advantage 1" format="avif" class="rounded-full w-[13rem]" />
+					<h6 class="font-semibold text-lg">Fast delivery</h6>
+					<p class="px-6 text-center">
+						Delivery in Edmonton<br> and surrounding area
+					</p>
+				</div>
 			</div>
 		</div>
 	</section>
