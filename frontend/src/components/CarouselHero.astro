@@ -28,7 +28,7 @@ var carouselId = "carousel-" + Math.random().toString(16).slice(2)
 
 	<div class="absolute bottom-0 w-full h-[50px] flex justify-center gap-6">
 		{data.map((el, i) =>
-			<span id=`${carouselId}-bullet-${i}` class=`${carouselId}-bullet w-[8px] h-[8px] rounded-full hover:cursor-pointer bg-white`></span>
+			<span id=`${carouselId}-bullet-${i}` class=`${carouselId}-bullet w-[8px] h-[8px] rounded-full hover:cursor-pointer bg-white hover:bg-brightRed`></span>
 		)}
 	</div>
 

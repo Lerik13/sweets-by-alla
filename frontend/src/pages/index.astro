@@ -3,49 +3,138 @@ import { Icon } from 'astro-icon';
 import Layout from '../layouts/Layout.astro';
 import Button from '../components/Button.astro';
 import CarouselHero from '../components/CarouselHero.astro';
+import TabCatalog from '../components/TabCatalog.astro';
 import contactData from '../data/contactData';
-//import { BASE_URL } from '../constants';
-type HeadData = {
+import { BASE_URL, HERO_URL } from '../constants';
+
+type HeroData = {
 	_id: number;
 	title: string;
 	image: string;
 };
-const res = await fetch("http://localhost:5000/api/hero");
-const headData: HeadData[] = await res.json();
+//const res = await fetch("http://localhost:5000/api/hero");
+const res = await fetch(BASE_URL + HERO_URL);
+const heroData: HeroData[] = await res.json();
 ---
 
 <Layout>
-	<div class="lg:container mx-auto p-6 pt-0 h-[40rem] flex flex-col md:flex-row items-center space-y-6 md:space-y-0">
-		<div class="flex flex-col justify-between w-full md:w-1/2 h-[40rem] md:h-full space-y-12 md:space-y-0">
-			<div class="mt-20 flex flex-col space-y-7">
-				<h1 class="text-5xl md:text-6xl font-serif leading-[3rem] md:leading-[4rem]">
-					Delicious cakes &amp;<br>
-					desserts for you!
-				</h1>
-				<p class="leading-[1.5rem]">
-					A large selection of delecious cakes, desserts and pastries.<br>
-					Suitable for both holidays and regular days. Delicious!
-				</p>
-				<div class="flex">
-					<Button text="Shop now" />
+	<!-- Hero Section -->
+	<section id="hero">
+		<div class="container mx-auto md:h-[40rem] flex flex-col md:flex-row items-center space-y-6 md:space-y-0">
+			<div class="flex flex-col justify-between w-full md:w-1/2 md:h-[40rem] md:h-full space-y-12 md:space-y-0 p-2">
+				<div class="mt-10 md:mt-20 flex flex-col space-y-7">
+					<h1 class="text-5xl md:text-6xl font-serif leading-[3rem] md:leading-[4rem]">
+						Delicious cakes &amp;<br>
+						desserts for you!
+					</h1>
+					<p class="leading-[1.5rem]">
+						A large selection of delecious cakes, desserts and pastries.<br>
+						Suitable for both holidays and regular days. Delicious!
+					</p>
+					<div class="flex">
+						<Button text="Shop now" />
+					</div>
+				</div>
+				<div class="flex gap-x-4">
+					<a href=`${contactData.facebook}` target="blank" class="flex justify-center items-center border hover:border-2 border-gray-400 hover:border-brightRed w-[40px] h-[40px] rounded-full">
+						<Icon name="jam:facebook" width="26px" class="" />
+					</a>
+					<a href=`${contactData.instagram}` target="blank" class="flex justify-center items-center border hover:border-2 border-gray-400 hover:border-brightRed w-[40px] h-[40px] rounded-full">
+						<Icon name="jam:instagram" width="26px" class="" />
+					</a>
+					<a href=`tel:${contactData.phoneValue}` class="flex justify-center items-center border hover:border-2 border-gray-400 hover:border-brightRed w-[40px] h-[40px] rounded-full">
+						<Icon name="ri:phone-fill" width="26px" class="" />
+					</a>
 				</div>
 			</div>
-			<div class="flex gap-x-4">
-				<a href=`${contactData.facebook}` target="blank" class="flex justify-center items-center border border-gray-400 w-[40px] h-[40px] rounded-full">
-					<Icon name="jam:facebook" width="26px" class="" />
-				</a>
-				<a href=`${contactData.instagram}` target="blank" class="flex justify-center items-center border border-gray-400 w-[40px] h-[40px] rounded-full">
-					<Icon name="jam:instagram" width="26px" class="" />
-				</a>
-				<a href=`tel:${contactData.phoneValue}` class="flex justify-center items-center border border-gray-400 w-[40px] h-[40px] rounded-full">
-					<Icon name="ri:phone-fill" width="26px" class="" />
-				</a>
+	
+			<div class="w-full md:w-1/2 h-[30rem] md:h-full overflow-hidden ">
+				<CarouselHero data={heroData} />
 			</div>
 		</div>
+	</section>
 
-		<div class="w-full md:w-1/2 h-[40rem] md:h-full md:overflow-hidden ">
-			<CarouselHero data={headData} />
+	<!-- Catalog -->
+	<section id="catalog" data-anchor="catalog">
+		<div class="container flex flex-col space-y-6 md:space-y-12 mx-auto mt-10 md:mt-20">
+			<h2 class="font-serif text-4xl md:text-5xl lg:text-5xl whitespace-nowrap pr-2 flex flex-col items-center ">
+				Catalog
+			</h2>
+			<div 
+				role="tablist"
+				aria-label="tabs"
+				class="w-max mx-auto grid grid-cols-2 md:grid-cols-4 gap-y-3 col-auto items-center px-[3px] overflow-hidden transition"
+			>
+				<button
+					role="tab"
+					aria-selected="true"
+					aria-controls="panel-cake"
+					id="tab-cake"
+					tabindex="0"
+					class="tab h-10 px-6 border-b border-brightRed text-brightRed font-semibold"
+				>
+					Popular cakes
+				</button>
+				<button
+					role="tab"
+					aria-selected="false"
+					aria-controls="panel-cupcake"
+					id="tab-cupcake"
+					tabindex="-1"
+					class="tab h-10 px-6 border-b border-veryLightGray font-semibold"
+				>
+					Cupcakes
+				</button>
+				<button
+					role="tab"
+					aria-selected="false"
+					aria-controls="panel-cake-pop"
+					id="tab-cake-pop"
+					tabindex="-1"
+					class="tab h-10 px-6 border-b border-veryLightGray font-semibold"
+				>
+					Cake pops
+				</button>
+				<button
+					role="tab"
+					aria-selected="false"
+					aria-controls="panel-gluten-free"
+					id="tab-gluten-free"
+					tabindex="-1"
+					class="tab h-10 px-6 border-b border-veryLightGray font-semibold"
+				>
+					Gluten-free desserts
+				</button>
+			</div>
+			<!-- Tab Content -->
+			<div class="mt-6 relative">
+				<TabCatalog
+					id="panel-cake"
+					category="cake"
+					href="/"
+					active={true}
+				/>
+				<TabCatalog
+					id="panel-cupcake"
+					category="cupcake"
+					href="/"
+				/>
+				<TabCatalog
+					id="panel-cake-pop"
+					category="cake pop"
+					href="/"
+				/>
+				<TabCatalog 
+					id="panel-gluten-free"
+					category="gluten-free dessert"
+					href="/"
+				/>
+			</div>
 		</div>
-	</div>
+	</section>
 
 </Layout>
+
+<script>
+	import "../js/tabs.js";
+</script>
