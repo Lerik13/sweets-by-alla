@@ -10,6 +10,7 @@ import userRoutes from './routes/userRoutes.js';
 import uploadRoutes from './routes/uploadRoutes.js';
 import categoryRoutes from './routes/categoryRoutes.js';
 import heroRoutes from './routes/heroRoutes.js';
+import reviewRoutes from './routes/reviewRoutes.js';
 const port = process.env.PORT || 5000;
 
 connectDB();
@@ -32,6 +33,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/upload', uploadRoutes);
 app.use('/api/categories', categoryRoutes);
 app.use('/api/hero', heroRoutes);
+app.use('/api/reviews', reviewRoutes);
 
 const __dirname = path.resolve(); // Set __dirname to current directory
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')));

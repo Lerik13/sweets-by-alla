@@ -6,6 +6,7 @@ import users from './data/users.js';
 import products from './data/products.js';
 import categories from './data/categories.js';
 import heros from './data/hero.js';
+import reviews from './data/reviews.js';
 import User from './models/userModel.js';
 import { Product, Category, Hero, Review } from './models/productModel.js';
 import connectDB from './config/db.js';
@@ -39,6 +40,11 @@ const importData = async () => {
 			return { ...hero, user: adminUser };
 		})
 		await Hero.insertMany(sampleHeros);
+
+		const sampleReviews = reviews.map((review) => {
+			return { ...review };
+		})
+		await Review.insertMany(sampleReviews);
 
 		console.log('Data Imported!'.green.inverse);
 		process.exit();

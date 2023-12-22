@@ -10,7 +10,7 @@ const hero = [
     order: 2
   },
   {
-    title: 'Made with love',
+    title: ' Brings back old memories',
 		image: '/hero/hero_3.jpg',
     order: 3
   },

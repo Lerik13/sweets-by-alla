@@ -11,8 +11,8 @@ const products = [
   },
   {
     name: 'Honey Cake',
-    image: '/products/cake/honey_cake_unicorn.jpg',
-    images: ['/products/cake/honey_cake_with_vanilla_popcakes.jpg', '/products/cake/honey_cake_harry_potter.jpg'],
+    image: '/products/cake/honey_cake_with_vanilla_popcakes.jpg',
+    images: ['/products/cake/honey_cake_unicorn.jpg', '/products/cake/honey_cake_harry_potter.jpg'],
     category: 'cake',
     description: 'Medovik, or Russian honey cake is comprised of layers of caramelised honey biscuit-like layers sandwiched between a sour cream frosting. The cake needs to be refrigerated overnight to allow the biscuit layers to soften by absorbing moisture from the cream. A bit more effort is required to make this cake than your regular sponge but look how amazing it is!',
 		ingredients: 'honey, butter, eggs, salt, sugar, flour, vanilla',
@@ -48,6 +48,16 @@ const products = [
 		ingredients: 'honey, butter, eggs, salt, sugar, flour, vanilla',
 		rating: 4,
 		order: 4,
+  },
+  {
+    name: 'Vanilla Cake with macaroons',
+    image: '/products/cake/cake_with_macaroons.jpg',
+    images: [],
+    category: 'cake',
+    description: 'Vanilla Cake with macaroons is comprised of layers of caramelised honey biscuit-like layers sandwiched between a sour cream frosting. The cake needs to be refrigerated overnight to allow the biscuit layers to soften by absorbing moisture from the cream. A bit more effort is required to make this cake than your regular sponge but look how amazing it is!',
+		ingredients: 'honey, butter, eggs, salt, sugar, flour, vanilla',
+		rating: 4.5,
+		order: 1,
   },
   {
     name: 'Vanilla Cake with strawberries',

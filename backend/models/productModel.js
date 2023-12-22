@@ -39,7 +39,7 @@ const productSchema = new mongoose.Schema({
 	order: {
 		type: Number,
 		required: true,
-		default: 10,
+		default: 9999,
 	}
 }, {
 	timestamps: true,
@@ -58,7 +58,7 @@ const categorySchema = new mongoose.Schema({
 	order: {
 		type: Number,
 		required: true,
-		default: 0,
+		default: 999,
 	},
 }, {
 	timestamps: true,
@@ -81,30 +81,38 @@ const heroSchema = new mongoose.Schema({
 	order: {
 		type: Number,
 		required: true,
-		default: 0,
+		default: 999,
 	},
 }, {
 	timestamps: true,
 });
 
 const reviewSchema = new mongoose.Schema({
-	user: {
-		type: mongoose.Schema.Types.ObjectId,
+	image: {
+		type: String,
 		required: true,
-		ref: "User",
+	},
+	name: {
+		type: String,
+		required: false,
+	},
+	title: {
+		type: String,
+		required: false,
 	},
 	comment: {
 		type: String,
 		required: false,
 	},
-	image: {
-		type: String,
-		required: true,
-	},
 	order: {
 		type: Number,
 		required: true,
-		default: 0,
+		default: 999,
+	},
+	approved: {
+		type: Boolean,
+		required: true,
+		default: false,
 	},
 }, {
 	timestamps: true,
