@@ -10,6 +10,7 @@ import { Image } from "astro:assets";
 import featureImage_1 from "../assets/images/feature1.jpg";
 import featureImage_2 from "../assets/images/feature2.jpg";
 import featureImage_3 from "../assets/images/feature3.jpg";
+import aboutImage from "../assets/images/about1.jpg";
 
 type HeroData = {
 	_id: number;
@@ -60,7 +61,7 @@ const heroData: HeroData[] = await res.json();
 
 	<!-- Catalog -->
 	<section id="catalog" data-anchor="catalog">
-		<div class="container flex flex-col space-y-8 md:space-y-12 mx-auto mt-10 md:mt-20">
+		<div class="container flex flex-col space-y-8 md:space-y-12 mx-auto mt-16 md:mt-20">
 			<h2 class="font-serif text-5xl md:text-6xl whitespace-nowrap pr-2 flex flex-col items-center">
 				Catalog
 			</h2>
@@ -139,7 +140,7 @@ const heroData: HeroData[] = await res.json();
 
 	<!-- Features Section -->
 	<section id="features" data-anchor="features">
-		<div class="container flex flex-col space-y-8 md:space-y-12 px-6 mx-auto mt-10 md:mt-20">
+		<div class="container flex flex-col space-y-8 md:space-y-12 px-6 mx-auto mt-16 md:mt-20">
 			<h2 class="font-serif text-5xl md:text-6xl whitespace-nowrap pr-2 flex flex-col items-center">
 				Our advantages
 			</h2>
@@ -169,6 +170,25 @@ const heroData: HeroData[] = await res.json();
 		</div>
 	</section>
 
+	<!-- About Section -->
+	<section id="about" data-anchor="about">
+		<div class="container flex flex-col space-y-8 md:space-y-12 px-6 mx-auto mt-16 md:mt-20">
+			<h2 class="font-serif text-5xl md:text-6xl whitespace-nowrap pr-2 flex flex-col items-center">
+				About Chef
+			</h2>
+			<div class="flex justify-center">
+				<div class="flex lg:w-9/12 flex-col-reverse md:flex-row gap-5 md:h-[20rem] xl:h-[25rem] ">
+					<p class="flex items-center md:w-2/3 leading-[1.6rem] p-4">
+						Hello everyone, my name is Alla Tkachenko and as you can see, I love to Bake! I live in Edmonton West end, Alberta Canada.
+						I adore baking organic and natural sweets from good ingredients. In my kitchen I don’t have shoo taring and margarine. By keeping these things out it makes my costumers happier and the cakes better. I have many years of experience on a Canadian pastry kitchen. I usually make cakes and sweets such as: cookies, macaroons, and cake pops. About how I decorate sweets, it all depends on the customer and what they want to see. I am looking forward to give you lots of memboribal sweets on your table!
+					</p>
+					<div class="md:w-1/3 overflow-hidden md:h-full">
+						<Image src={aboutImage} alt="Alla Tkachenko chef" format="avif" class="object-cover w-full h-full" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 </Layout>
 
 <script>
