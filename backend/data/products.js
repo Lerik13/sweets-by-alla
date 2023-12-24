@@ -57,7 +57,7 @@ const products = [
     description: 'Vanilla Cake with macaroons is comprised of layers of caramelised honey biscuit-like layers sandwiched between a sour cream frosting. The cake needs to be refrigerated overnight to allow the biscuit layers to soften by absorbing moisture from the cream. A bit more effort is required to make this cake than your regular sponge but look how amazing it is!',
 		ingredients: 'honey, butter, eggs, salt, sugar, flour, vanilla',
 		rating: 4.5,
-		order: 1,
+		order: 11,
   },
   {
     name: 'Vanilla Cake with strawberries',

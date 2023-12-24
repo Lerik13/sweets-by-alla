@@ -1,38 +1,31 @@
 ---
 import { Icon } from 'astro-icon';
+import { Image } from "astro:assets";
+import contactData from '../data/contactData';
 import Layout from '../layouts/Layout.astro';
 import Button from '../components/Button.astro';
 import CarouselHero from '../components/CarouselHero.astro';
 import TabCatalog from '../components/TabCatalog.astro';
-import contactData from '../data/contactData';
-import { BASE_URL, HERO_URL } from '../constants';
-import { Image } from "astro:assets";
+import Reviews from '../components/Reviews.astro';
+
 import featureImage_1 from "../assets/images/feature1.jpg";
 import featureImage_2 from "../assets/images/feature2.jpg";
 import featureImage_3 from "../assets/images/feature3.jpg";
 import aboutImage from "../assets/images/about1.jpg";
 
-type HeroData = {
-	_id: number;
-	title: string;
-	image: string;
-};
-//const res = await fetch("http://localhost:5000/api/hero");
-const res = await fetch(BASE_URL + HERO_URL);
-const heroData: HeroData[] = await res.json();
 ---
 
 <Layout>
 	<!-- Hero Section -->
 	<section id="hero">
-		<div class="container mx-auto md:h-[40rem] flex flex-col md:flex-row items-center space-y-6 md:space-y-0">
-			<div class="flex flex-col justify-between w-full md:w-1/2 md:h-[40rem] md:h-full space-y-12 md:space-y-0 p-2">
-				<div class="mt-10 md:mt-20 flex flex-col space-y-7">
+		<div class="container mx-auto md:h-[40rem] flex flex-col-reverse md:flex-row items-center">
+			<div class="flex flex-col items-center md:items-start justify-between w-full md:w-1/2 md:h-[40rem] md:h-full space-y-12 md:space-y-0 p-2 pt-0 border-0 border-green-500">
+				<div class="mt-10 md:mt-20 flex flex-col space-y-7 items-center md:items-start">
 					<h1 class="text-5xl md:text-6xl font-serif leading-[3rem] md:leading-[4rem]">
 						Delicious cakes &amp;<br>
 						desserts for you!
 					</h1>
-					<p class="leading-[1.5rem]">
+					<p class="text-base leading-[1.5rem]">
 						A large selection of delecious cakes, desserts and pastries.<br>
 						Suitable for both holidays and regular days. Delicious!
 					</p>
@@ -53,22 +46,22 @@ const heroData: HeroData[] = await res.json();
 				</div>
 			</div>
 	
-			<div class="w-full md:w-1/2 h-[30rem] md:h-full overflow-hidden ">
-				<CarouselHero data={heroData} />
+			<div class="w-full md:w-1/2 h-[30rem] md:h-full overflow-hidden">
+				<CarouselHero />
 			</div>
 		</div>
 	</section>
 
 	<!-- Catalog -->
 	<section id="catalog" data-anchor="catalog">
-		<div class="container flex flex-col space-y-8 md:space-y-12 mx-auto mt-16 md:mt-20">
-			<h2 class="font-serif text-5xl md:text-6xl whitespace-nowrap pr-2 flex flex-col items-center">
+		<div class="container flex flex-col space-y-10 md:space-y-12 mx-auto mt-16 md:mt-20">
+			<h2 class="font-serif text-5xl md:text-6xl whitespace-nowrap pr-2 flex justify-center">
 				Catalog
 			</h2>
 			<div 
 				role="tablist"
 				aria-label="tabs"
-				class="w-max mx-auto grid grid-cols-2 md:grid-cols-4 gap-y-3 col-auto items-center px-[3px] overflow-hidden transition"
+				class="w-max mx-auto grid grid-cols-2 md:grid-cols-4 gap-y-3 col-auto items-center px-[3px] overflow-hidden transition text-base font-semibold"
 			>
 				<button
 					role="tab"
@@ -76,7 +69,7 @@ const heroData: HeroData[] = await res.json();
 					aria-controls="panel-cake"
 					id="tab-cake"
 					tabindex="0"
-					class="tab h-10 px-6 border-b border-brightRed text-brightRed font-semibold"
+					class="tab h-10 px-6 border-b border-brightRed text-brightRed"
 				>
 					Popular cakes
 				</button>
@@ -86,7 +79,7 @@ const heroData: HeroData[] = await res.json();
 					aria-controls="panel-cupcake"
 					id="tab-cupcake"
 					tabindex="-1"
-					class="tab h-10 px-6 border-b border-veryLightGray font-semibold"
+					class="tab h-10 px-6 border-b border-veryLightGray"
 				>
 					Cupcakes
 				</button>
@@ -96,7 +89,7 @@ const heroData: HeroData[] = await res.json();
 					aria-controls="panel-cake-pop"
 					id="tab-cake-pop"
 					tabindex="-1"
-					class="tab h-10 px-6 border-b border-veryLightGray font-semibold"
+					class="tab h-10 px-6 border-b border-veryLightGray"
 				>
 					Cake pops
 				</button>
@@ -106,7 +99,7 @@ const heroData: HeroData[] = await res.json();
 					aria-controls="panel-gluten-free"
 					id="tab-gluten-free"
 					tabindex="-1"
-					class="tab h-10 px-6 border-b border-veryLightGray font-semibold"
+					class="tab h-10 px-6 border-b border-veryLightGray"
 				>
 					Gluten-free desserts
 				</button>
@@ -140,45 +133,56 @@ const heroData: HeroData[] = await res.json();
 
 	<!-- Features Section -->
 	<section id="features" data-anchor="features">
-		<div class="container flex flex-col space-y-8 md:space-y-12 px-6 mx-auto mt-16 md:mt-20">
-			<h2 class="font-serif text-5xl md:text-6xl whitespace-nowrap pr-2 flex flex-col items-center">
+		<div class="container flex flex-col space-y-10 md:space-y-12 px-6 mx-auto mt-16 md:mt-20">
+			<h2 class="font-serif text-5xl md:text-6xl whitespace-nowrap pr-2 flex justify-center">
 				Our advantages
 			</h2>
-			<div class="flex flex-col md:flex-row gap-10 md:gap-4 lg:gap-[4rem] xl:gap-[6rem] items-center md:items-end justify-center">
-				<div class="flex flex-col space-y-3 items-center md:w-[14rem]">
-					<Image src={featureImage_1} alt="advantage 1" format="avif" class="rounded-full w-[13rem]" />
-					<h6 class="font-semibold text-lg">High quality</h6>
-					<p class="px-6 text-center">
-						Handmade cake & natural<br> ingredients
-					</p>
+			<div class="flex flex-col md:flex-row gap-8 md:gap-4 lg:gap-[4rem] xl:gap-[6rem] md:items-end justify-center">
+				<div class="flex flex-row md:flex-col space-x-3 space-y-3 items-center md:w-[14rem] border-0 border-red-300">
+					<div class="border-0 border-green-300 w-[10rem] md:w-[13rem]">
+						<Image src={featureImage_1} alt="advantage 1" format="avif" class="rounded-full w-full" />
+					</div>
+					<div class="flex flex-col gap-2 md:items-center">
+						<h6 class="font-semibold text-lg">High quality</h6>
+						<p class="md:px-6 md:text-center">
+							Handmade cake & natural ingredients
+						</p>
+					</div>
 				</div>
-				<div class="flex flex-col space-y-3 items-center md:w-[17rem]">
-					<Image src={featureImage_2} alt="advantage 1" format="avif" class="rounded-full w-[16rem]" />
-					<h6 class="font-semibold text-lg">Beautiful decor</h6>
-					<p class="px-6 text-center">
-						Variety theme decoration<br> for special occasion
-					</p>
+				<div class="flex flex-row md:flex-col space-x-3 space-y-3 items-center md:w-[17rem] border-0 border-red-300">
+					<div class="border-0 border-green-300 w-[10rem] md:w-[16rem]">
+						<Image src={featureImage_2} alt="advantage 1" format="avif" class="rounded-full w-full" />
+					</div>
+					<div class="flex flex-col gap-2 md:items-center">
+						<h6 class="font-semibold text-lg">Beautiful decor</h6>
+						<p class="md:px-6 md:text-center">
+							Variety theme decoration for special occasion
+						</p>
+					</div>
 				</div>
-				<div class="flex flex-col space-y-3 items-center md:w-[14rem]">
-					<Image src={featureImage_3} alt="advantage 1" format="avif" class="rounded-full w-[13rem]" />
-					<h6 class="font-semibold text-lg">Fast delivery</h6>
-					<p class="px-6 text-center">
-						Delivery in Edmonton<br> and surrounding area
-					</p>
+				<div class="flex flex-row md:flex-col space-x-3 space-y-3 items-center md:w-[14rem] border-0 border-red-300">
+					<div class="border-0 border-green-300 w-[10rem] md:w-[13rem]">
+						<Image src={featureImage_3} alt="advantage 1" format="avif" class="rounded-full w-full" />
+					</div>
+					<div class="flex flex-col gap-2 md:items-center">
+						<h6 class="font-semibold text-lg">Fast delivery</h6>
+						<p class="md:px-6 md:text-center">
+							Delivery in Edmonton and surrounding area
+						</p>
+					</div>
 				</div>
-			</div>
 		</div>
 	</section>
 
 	<!-- About Section -->
 	<section id="about" data-anchor="about">
-		<div class="container flex flex-col space-y-8 md:space-y-12 px-6 mx-auto mt-16 md:mt-20">
-			<h2 class="font-serif text-5xl md:text-6xl whitespace-nowrap pr-2 flex flex-col items-center">
+		<div class="container flex flex-col space-y-10 md:space-y-12 px-6 mx-auto mt-16 md:mt-20">
+			<h2 class="font-serif text-5xl md:text-6xl whitespace-nowrap pr-2 flex justify-center">
 				About Chef
 			</h2>
 			<div class="flex justify-center">
 				<div class="flex lg:w-9/12 flex-col-reverse md:flex-row gap-5 md:h-[20rem] xl:h-[25rem] ">
-					<p class="flex items-center md:w-2/3 leading-[1.6rem] p-4">
+					<p class="flex items-center md:w-2/3 leading-[1.6rem] p-4 text-base">
 						Hello everyone, my name is Alla Tkachenko and as you can see, I love to Bake! I live in Edmonton West end, Alberta Canada.
 						I adore baking organic and natural sweets from good ingredients. In my kitchen I don’t have shoo taring and margarine. By keeping these things out it makes my costumers happier and the cakes better. I have many years of experience on a Canadian pastry kitchen. I usually make cakes and sweets such as: cookies, macaroons, and cake pops. About how I decorate sweets, it all depends on the customer and what they want to see. I am looking forward to give you lots of memboribal sweets on your table!
 					</p>
@@ -189,6 +193,17 @@ const heroData: HeroData[] = await res.json();
 			</div>
 		</div>
 	</section>
+
+	<!-- Reviews Section -->
+	<section id="reviews" data-anchor="reviews">
+		<div class="container flex flex-col mx-auto mt-16 md:mt-20">
+			<h2 class="font-serif text-5xl md:text-6xl whitespace-nowrap pr-2 flex justify-center">
+				Reviews
+			</h2>
+			<Reviews />
+		</div>
+	</section>
+
 </Layout>
 
 <script>

@@ -1,0 +1,134 @@
+---
+import { Image } from "astro:assets";
+import { Icon } from 'astro-icon';
+import { BASE_URL, REVIEWS_URL } from '../constants';
+import { isLeftHandSideExpression } from "typescript";
+
+type ReviewData = {
+	_id: number;
+	title: string;
+	image: string;
+};
+
+const res = await fetch(BASE_URL + REVIEWS_URL);
+const data: ReviewData[] = await res.json();
+const len = data.length;
+console.log(len)
+---
+<div class="relative flex flex-col overflow-hidden">
+	<div class="flex md:justify-end px-4 mt-4">
+		<div class="w-[9rem] h-[5rem] flex justify-between items-center">
+			<button  id="reviews-arrow-left" class="disabledContent arrow w-[36px] h-[36px]  transition-all duration-300 ease-out rounded-full border border-veryLightGray text-gray-600">
+				<Icon name="ri:arrow-left-s-line" width="36px" class="" />
+			</button>
+			<div class="text-base">
+				<span id="reviews-number">1</span> / <span>{len}</span>
+			</div>
+			<button id="reviews-arrow-right" class="arrow w-[36px] h-[36px] transition-all duration-300 ease-out  rounded-full border border-veryLightGray text-gray-600">
+				<Icon name="ri:arrow-right-s-line" width="36px" class="" />
+			</button>
+		</div>
+	</div>
+	<div class="reviews flex transition-all duration-300 ease-out">
+		{data.map((el) => (
+			<div class="review max-w-full md:max-w-3xl xl:max-w-6xl grid grid-cols-1 md:grid-cols-7  flex flex-col md:flex-row flex-grow shrink-0 basis-full">
+				<div class="h-[20rem] md:h-auto lg:h-[20rem] xl:h-[24rem] col-span-3 overflow-hidden">
+					<Image src={el.image} alt={el.name} width="600" height="600" class="object-cover w-full h-full" />
+				</div>
+				<div class="h-[19rem] sm:h-[20rem] md:h-auto col-span-4 flex flex-col  space-y-4 px-5 md:pl-10 xl:pl-20 lg:pr-24 md:pr-10 xl:pr-32 md:justify-center pt-10 md:pt-2">
+					<p class="font-semibold text-lg">
+						{el.name}
+					</p>
+					<p class="font-semibold">
+						{el.title}
+					</p>
+					<p class="">
+						{el.comment}
+					</p>
+				</div>
+			</div>
+		))}
+	</div>
+</div>
+
+<style>
+	.disabledContent {
+		pointer-events: none;
+		color: var(--veryLightGray);
+	}
+</style>
+
+<script define:vars={{ len }}>
+	let slideIndex = 0;
+
+	let shift;
+	let unit;
+
+	const calcShift = () => {
+		if (screen.width > 1439) {				// max-w-6xl
+			shift = 72; unit = 'rem';
+		} else if (screen.width > 975) {	// max-w-3xl
+			shift = 48; unit = 'rem';
+		} else {													// max-w-full
+			shift = 100; unit = '%';
+		}
+	}
+	calcShift();
+	window.addEventListener("resize", calcShift);
+
+	function moveSliderLeft() {
+		if (!document.querySelector('#reviews-arrow-left').classList.contains('disabledContent')) {
+			console.log('moveSliderLeft')
+			// enable buttons left & right
+			document.querySelector('#reviews-arrow-left').classList.remove('disabledContent');
+			document.querySelector('#reviews-arrow-right').classList.remove('disabledContent');
+
+			slideIndex--;
+
+			if (slideIndex === 0) {
+				document.querySelector('#reviews-arrow-left').classList.add('disabledContent');
+			}
+
+			document.querySelector('.reviews').style.transform = `translate(-${shift * slideIndex}${unit})`;
+			document.querySelector('#reviews-number').innerHTML = slideIndex + 1;
+		}
+	}
+
+	function moveSliderRight() {
+		if (!document.querySelector('#reviews-arrow-right').classList.contains('disabledContent')) {
+			console.log('moveSliderRight')
+			// enable buttons left & right
+			document.querySelector('#reviews-arrow-left').classList.remove('disabledContent');
+			document.querySelector('#reviews-arrow-right').classList.remove('disabledContent');
+
+			slideIndex++;
+			
+			if (slideIndex === len - 1) {
+				document.querySelector('#reviews-arrow-right').classList.add('disabledContent');
+			}
+			document.querySelector('.reviews').style.transform = `translate(-${shift * slideIndex}${unit})`;
+			document.querySelector('#reviews-number').innerHTML = slideIndex + 1;
+		}
+	}
+
+	document.querySelector('#reviews-arrow-left').addEventListener('click', moveSliderLeft)
+	document.querySelector('#reviews-arrow-right').addEventListener('click', moveSliderRight)
+
+
+	let touchstartX = 0
+	let touchendX = 0
+			
+	function checkDirection() {
+		if (touchendX < touchstartX) { moveSliderLeft(); } // swiped left
+		if (touchendX > touchstartX) { moveSliderRight(); } //swiped right
+}
+
+	document.querySelector('.reviews').addEventListener('touchstart', e => {
+		touchstartX = e.changedTouches[0].screenX
+	})
+
+	document.querySelector('.reviews').addEventListener('touchend', e => {
+		touchendX = e.changedTouches[0].screenX
+		checkDirection()
+	})
+</script>

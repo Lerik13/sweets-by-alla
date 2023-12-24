@@ -11,7 +11,7 @@ const reviews = [
 		image: '/reviews/review_2.jpg',
 		name: 'Anna',
 		title: 'Napoleon cake for birthday party',
-		comment: "Thank you ALla for making such a scrumptious and delicious cake, it was a massive hit!!! Can't thank you enough again for the most perfect cake, my daughter absolutely loved it as did everyone and not a crumb left. Thank for such an amazing cake!",
+		comment: "Thank you Alla for making such a scrumptious and delicious cake, it was a massive hit!!! Can't thank you enough again for the most perfect cake, my daughter absolutely loved it as did everyone and not a crumb left. Thank for such an amazing cake!",
 		order: 2,
 		approved: true
 	},

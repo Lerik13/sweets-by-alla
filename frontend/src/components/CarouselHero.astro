@@ -1,21 +1,23 @@
 ---
 import { Image } from "astro:assets";
-/*
-interface Props {
-	_id: string;
+import { BASE_URL, HERO_URL } from '../constants';
+
+type HeroData = {
+	_id: number;
 	title: string;
 	image: string;
-}
-*/
-const { data } = Astro.props;
-const images = import.meta.glob('/src/assets/hero/*.{jpeg,jpg,png,gif}')
+};
 
-var carouselId = "carousel-" + Math.random().toString(16).slice(2)
+const res = await fetch(BASE_URL + HERO_URL);
+const data: HeroData[] = await res.json();
+
+const images = import.meta.glob('/src/assets/hero/*.{jpeg,jpg,png,gif}')
 ---
-<div class="h-full relative">
+<div class="carouselHero h-full relative">
 	{data.map((el, i) => (
-		<div id=`${carouselId}-slide-${i}` class=`${carouselId}-slide w-full h-full relative hidden`>
+		<div id=`carouselHero-slide-${i}` class="carouselHero-slide w-full h-full relative hidden">
 			<Image src={images['/src/assets'+el.image]()} alt={el.title} width="800" class="object-cover w-full h-full" />
+			
 			{ (el.title !== '') &&
 			<div class="absolute top-3/4 font-serif text-brightRed text-xl w-full flex justify-center">
 				<p class="w-fit p-[10px] bg-white bg-opacity-50">
@@ -28,7 +30,7 @@ var carouselId = "carousel-" + Math.random().toString(16).slice(2)
 
 	<div class="absolute bottom-0 w-full h-[50px] flex justify-center gap-6">
 		{data.map((el, i) =>
-			<span id=`${carouselId}-bullet-${i}` class=`${carouselId}-bullet w-[8px] h-[8px] rounded-full hover:cursor-pointer bg-white hover:bg-brightRed`></span>
+			<span id=`carouselHero-bullet-${i}` class=`carouselHero-bullet w-[8px] h-[8px] rounded-full hover:cursor-pointer bg-white hover:bg-brightRed`></span>
 		)}
 	</div>
 
@@ -51,47 +53,77 @@ var carouselId = "carousel-" + Math.random().toString(16).slice(2)
 	}
 </style>
 
-<script define:vars={{ data, carouselId }}>
+<script define:vars={{ data }}>
 	let len = data.length;
 	let dots;
-	let active_dot = 0;
+	let active_bullet = 0;
 
 	function changeBullet(i = 0) {
-		document.querySelectorAll(`.${carouselId}-slide`).forEach(slide => {
+		document.querySelectorAll(".carouselHero-slide").forEach(slide => {
 			slide.classList.add("hidden");
 		})
-		document.querySelector(`#${carouselId}-slide-${i}`).classList.remove("hidden");
+		document.querySelector(`#carouselHero-slide-${i}`).classList.remove("hidden");
 
-		document.querySelectorAll(`.${carouselId}-bullet`).forEach(bullet => {
+		document.querySelectorAll(".carouselHero-bullet").forEach(bullet => {
 			bullet.classList.remove("active-bullet");
 		})
-		document.querySelector(`#${carouselId}-bullet-${i}`).classList.add("active-bullet");
+		document.querySelector(`#carouselHero-bullet-${i}`).classList.add("active-bullet");
 	}
 
 	for (let i = 0; i < len; i++) {
-		document.querySelector(`#${carouselId}-bullet-${i}`).addEventListener('click', () => {
+		document.querySelector(`#carouselHero-bullet-${i}`).addEventListener('click', () => {
 			clearInterval(dots);
 			changeBullet(i);
-			//active_dot = i;
+			//active_bullet = i;
 			//startInterval();
 		})
 	}
 
+
 	function startInterval() {
-		changeBullet(); active_dot++;
+		changeBullet(); active_bullet++;
 
 		dots = setInterval(function() {
-			changeBullet(active_dot);
-			if (active_dot+1 < len) {
-				active_dot++;
-			} else {
-				active_dot = 0;
-			}
+			moveBulletRight();
 		}, 3000)
 	}
 	
-	//startInterval()
-	changeBullet()
+	startInterval()
+	//changeBullet()
 
+	let touchstartX = 0;
+	let touchendX = 0;
+
+	function moveBulletLeft() {
+		if (active_bullet === 0) {
+			active_bullet = len-1;
+		} else {
+			active_bullet--;
+		}
+		changeBullet(active_bullet);
+	}
+
+	function moveBulletRight() {
+		if (active_bullet+1 < len) {
+			active_bullet++;
+		} else {
+			active_bullet = 0;
+		}
+		changeBullet(active_bullet);
+	}
+
+	function checkDirection() {
+		if (touchendX < touchstartX) { moveBulletLeft(); } // swiped left
+		if (touchendX > touchstartX) { moveBulletRight(); } // swiped right
+	}
+
+	document.querySelector('.carouselHero').addEventListener('touchstart', e => {
+		touchstartX = e.changedTouches[0].screenX
+	})
+
+	document.querySelector('.carouselHero').addEventListener('touchend', e => {
+		touchendX = e.changedTouches[0].screenX
+		checkDirection()
+	})
 </script>
 
