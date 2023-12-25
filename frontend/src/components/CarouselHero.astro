@@ -79,9 +79,8 @@ const images = import.meta.glob('/src/assets/hero/*.{jpeg,jpg,png,gif}')
 		})
 	}
 
-
 	function startInterval() {
-		changeBullet(); active_bullet++;
+		changeBullet(); //active_bullet++;
 
 		dots = setInterval(function() {
 			moveBulletRight();
@@ -113,17 +112,19 @@ const images = import.meta.glob('/src/assets/hero/*.{jpeg,jpg,png,gif}')
 	}
 
 	function checkDirection() {
-		if (touchendX < touchstartX) { moveBulletLeft(); } // swiped left
-		if (touchendX > touchstartX) { moveBulletRight(); } // swiped right
+		if (touchendX < touchstartX) { clearInterval(dots); moveBulletLeft(); } // swiped left
+		if (touchendX > touchstartX) { clearInterval(dots); moveBulletRight(); } // swiped right
 	}
+	
+	if (screen.width < 768) { // swipe is working only for Mobile version
+		document.querySelector('.carouselHero').addEventListener('touchstart', e => {
+			touchstartX = e.changedTouches[0].screenX
+		})
 
-	document.querySelector('.carouselHero').addEventListener('touchstart', e => {
-		touchstartX = e.changedTouches[0].screenX
-	})
-
-	document.querySelector('.carouselHero').addEventListener('touchend', e => {
-		touchendX = e.changedTouches[0].screenX
-		checkDirection()
-	})
+		document.querySelector('.carouselHero').addEventListener('touchend', e => {
+			touchendX = e.changedTouches[0].screenX
+			checkDirection()
+		})
+	}
 </script>
 

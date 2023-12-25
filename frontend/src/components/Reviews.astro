@@ -35,14 +35,14 @@ console.log(len)
 				<div class="h-[20rem] md:h-auto lg:h-[20rem] xl:h-[24rem] col-span-3 overflow-hidden">
 					<Image src={el.image} alt={el.name} width="600" height="600" class="object-cover w-full h-full" />
 				</div>
-				<div class="h-[19rem] sm:h-[20rem] md:h-auto col-span-4 flex flex-col  space-y-4 px-5 md:pl-10 xl:pl-20 lg:pr-24 md:pr-10 xl:pr-32 md:justify-center pt-10 md:pt-2">
+				<div class="h-auto col-span-4 flex flex-col  space-y-4 px-5 md:pl-10 xl:pl-20 lg:pr-24 md:pr-10 xl:pr-32 md:justify-center pt-10 md:pt-2">
 					<p class="font-semibold text-lg">
 						{el.name}
 					</p>
 					<p class="font-semibold">
 						{el.title}
 					</p>
-					<p class="">
+					<p class="text-justify">
 						{el.comment}
 					</p>
 				</div>
@@ -78,7 +78,6 @@ console.log(len)
 
 	function moveSliderLeft() {
 		if (!document.querySelector('#reviews-arrow-left').classList.contains('disabledContent')) {
-			console.log('moveSliderLeft')
 			// enable buttons left & right
 			document.querySelector('#reviews-arrow-left').classList.remove('disabledContent');
 			document.querySelector('#reviews-arrow-right').classList.remove('disabledContent');
@@ -96,7 +95,6 @@ console.log(len)
 
 	function moveSliderRight() {
 		if (!document.querySelector('#reviews-arrow-right').classList.contains('disabledContent')) {
-			console.log('moveSliderRight')
 			// enable buttons left & right
 			document.querySelector('#reviews-arrow-left').classList.remove('disabledContent');
 			document.querySelector('#reviews-arrow-right').classList.remove('disabledContent');
@@ -114,21 +112,24 @@ console.log(len)
 	document.querySelector('#reviews-arrow-left').addEventListener('click', moveSliderLeft)
 	document.querySelector('#reviews-arrow-right').addEventListener('click', moveSliderRight)
 
-
+	
 	let touchstartX = 0
 	let touchendX = 0
 			
 	function checkDirection() {
 		if (touchendX < touchstartX) { moveSliderLeft(); } // swiped left
 		if (touchendX > touchstartX) { moveSliderRight(); } //swiped right
-}
+	}
 
-	document.querySelector('.reviews').addEventListener('touchstart', e => {
-		touchstartX = e.changedTouches[0].screenX
-	})
+	if (screen.width < 768) { // swipe is working only for Mobile version
+		document.querySelector('.reviews').addEventListener('touchstart', e => {
+			touchstartX = e.changedTouches[0].screenX
+		})
 
-	document.querySelector('.reviews').addEventListener('touchend', e => {
-		touchendX = e.changedTouches[0].screenX
-		checkDirection()
-	})
+		document.querySelector('.reviews').addEventListener('touchend', e => {
+			touchendX = e.changedTouches[0].screenX
+			checkDirection()
+		})
+	}
+
 </script>

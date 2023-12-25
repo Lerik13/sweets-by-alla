@@ -12,12 +12,13 @@ import featureImage_1 from "../assets/images/feature1.jpg";
 import featureImage_2 from "../assets/images/feature2.jpg";
 import featureImage_3 from "../assets/images/feature3.jpg";
 import aboutImage from "../assets/images/about1.jpg";
+import howToOrderImage from "../assets/images/how-to-order.jpg";
 
 ---
 
 <Layout>
 	<!-- Hero Section -->
-	<section id="hero">
+	<section id="home" data-anchor="home">
 		<div class="container mx-auto md:h-[40rem] flex flex-col-reverse md:flex-row items-center">
 			<div class="flex flex-col items-center md:items-start justify-between w-full md:w-1/2 md:h-[40rem] md:h-full space-y-12 md:space-y-0 p-2 pt-0 border-0 border-green-500">
 				<div class="mt-10 md:mt-20 flex flex-col space-y-7 items-center md:items-start">
@@ -61,7 +62,7 @@ import aboutImage from "../assets/images/about1.jpg";
 			<div 
 				role="tablist"
 				aria-label="tabs"
-				class="w-max mx-auto grid grid-cols-2 md:grid-cols-4 gap-y-3 col-auto items-center px-[3px] overflow-hidden transition text-base font-semibold"
+				class="w-max mx-auto grid grid-cols-2 md:grid-cols-4 gap-y-3 col-auto items-center px-[3px] overflow-hidden transition md:text-base font-semibold"
 			>
 				<button
 					role="tab"
@@ -151,7 +152,7 @@ import aboutImage from "../assets/images/about1.jpg";
 				</div>
 				<div class="flex flex-row md:flex-col space-x-3 space-y-3 items-center md:w-[17rem] border-0 border-red-300">
 					<div class="border-0 border-green-300 w-[10rem] md:w-[16rem]">
-						<Image src={featureImage_2} alt="advantage 1" format="avif" class="rounded-full w-full" />
+						<Image src={featureImage_2} alt="advantage 2" format="avif" class="rounded-full w-full" />
 					</div>
 					<div class="flex flex-col gap-2 md:items-center">
 						<h6 class="font-semibold text-lg">Beautiful decor</h6>
@@ -162,7 +163,7 @@ import aboutImage from "../assets/images/about1.jpg";
 				</div>
 				<div class="flex flex-row md:flex-col space-x-3 space-y-3 items-center md:w-[14rem] border-0 border-red-300">
 					<div class="border-0 border-green-300 w-[10rem] md:w-[13rem]">
-						<Image src={featureImage_3} alt="advantage 1" format="avif" class="rounded-full w-full" />
+						<Image src={featureImage_3} alt="advantage 3" format="avif" class="rounded-full w-full" />
 					</div>
 					<div class="flex flex-col gap-2 md:items-center">
 						<h6 class="font-semibold text-lg">Fast delivery</h6>
@@ -182,7 +183,7 @@ import aboutImage from "../assets/images/about1.jpg";
 			</h2>
 			<div class="flex justify-center">
 				<div class="flex lg:w-9/12 flex-col-reverse md:flex-row gap-5 md:h-[20rem] xl:h-[25rem] ">
-					<p class="flex items-center md:w-2/3 leading-[1.6rem] p-4 text-base">
+					<p class="flex items-center md:w-2/3 leading-[1.6rem] p-4 text-base text-justify">
 						Hello everyone, my name is Alla Tkachenko and as you can see, I love to Bake! I live in Edmonton West end, Alberta Canada.
 						I adore baking organic and natural sweets from good ingredients. In my kitchen I don’t have shoo taring and margarine. By keeping these things out it makes my costumers happier and the cakes better. I have many years of experience on a Canadian pastry kitchen. I usually make cakes and sweets such as: cookies, macaroons, and cake pops. About how I decorate sweets, it all depends on the customer and what they want to see. I am looking forward to give you lots of memboribal sweets on your table!
 					</p>
@@ -201,6 +202,35 @@ import aboutImage from "../assets/images/about1.jpg";
 				Reviews
 			</h2>
 			<Reviews />
+		</div>
+	</section>
+
+	<!-- Form: How-to-Order Section -->
+	<section id="how-to-order" data-anchor="how-to-order">
+		<div class="container flex mx-auto mt-16 md:mt-20">
+			<div class="hidden md:block md:w-2/5 lg:w-1/2 xl:w-3/5 h-[30rem] overflow-hidden">
+				<Image src={howToOrderImage} alt="how to order" format="avif" class="object-cover w-full h-full" />
+			</div>
+			<div class="w-full md:w-3/5 lg:w-1/2 xl:w-2/5 flex">
+				<div class="flex flex-col justify-center h-full w-full px-[2.5rem] space-y-5">
+					<h2 class="font-serif text-5xl md:text-6xl whitespace-nowrap">
+						How to order
+					</h2>
+					<p>
+						Please leave your contact information and we will get back to you as soon as possible
+					</p>
+					<form name="contact" id="form" method="POST" data-netlify="true" class="flex flex-col w-full space-y-5">
+						<input class="px-5 py-3.5 w-full py-5 bg-veryLightGray rounded-full " id="name" name="name" type="text" placeholder="Name" required>
+						<input class="px-5 py-3.5 w-full py-5 bg-veryLightGray rounded-full " id="phone" name="phone" type="text" placeholder="Phone" required>
+						<div class="flex justify-center md:justify-start mt-8">
+						<button type="submit" class="px-12 py-3.5 align-baseline bg-brightRed text-bgColor border rounded-full border-brightRed transition-all duration-500 ease-out">
+							Send
+						</button>
+						</div>
+					</form>
+				</div>
+			</div>
+			
 		</div>
 	</section>
 
