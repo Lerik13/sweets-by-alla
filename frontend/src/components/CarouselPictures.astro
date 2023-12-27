@@ -1,0 +1,115 @@
+---
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon";
+
+interface Props {
+	name: string;
+	images: string[];
+}
+
+const {
+	name,
+	images
+} = Astro.props as Props;
+
+---
+<div class="flex flex-col space-y-4 lg:space-y-6">
+	<div class="relative w-full h-full border">
+		<div class=" w-full h-[22rem] md:h-[27rem] lg:h-[31rem] overflow-hidden">
+			<Image id="carousel-pic-main" src={images[0]} alt={name} width="600" height="600" class="object-cover w-full h-full" />
+		</div>
+		<button  id="carousel-pics-arrow-left" class="disabledContent arrow w-[36px] h-[36px] absolute top-[calc(50%-18px)] left-2 text-veryLightGray hover:text-white hover:scale-110 border border-veryLightGray rounded-full text-gray-600 transition-all duration-300 ease-out">
+			<Icon name="ri:arrow-left-s-line" width="36px" class="" />
+		</button>
+		<button  id="carousel-pics-arrow-right" class="disabledContent arrow w-[36px] h-[36px] absolute top-[calc(50%-18px)] right-2 text-veryLightGray hover:text-white hover:scale-110 border border-veryLightGray rounded-full text-gray-600 transition-all duration-300 ease-out">
+			<Icon name="ri:arrow-right-s-line" width="36px" class="" />
+		</button>
+	</div>
+	<div id="carousel-pics-nav" class="flex space-x-2 flex-grow shrink-0 basis-full">
+		{images.map((img, i) => (
+			<div id=`carousel-pic-${i}` class="carousel-pic w-[4rem] lg:w-[6rem] h-[4rem] lg:h-[6rem] overflow-hidden border-brightRed hover:cursor-pointer">
+				<Image src={img} alt={name} width="600" height="600" class="object-cover w-full h-full" />
+			</div>
+		))}
+	</div>
+</div>
+
+<style>
+	.disabledContent {
+		pointer-events: none;
+		color: gray;
+		border-color: gray;
+	}
+</style>
+
+<script define:vars={{ images }}>
+	let slideIndex = 0;
+	const len = images.length;
+
+	if (len === 1) {
+		document.querySelector('#carousel-pics-nav').classList.add('hidden');
+		document.querySelector('#carousel-pics-arrow-left').classList.add('hidden');
+		document.querySelector('#carousel-pics-arrow-right').classList.add('hidden');
+	} else {
+		changePicture(0);
+	}
+
+	function changePicture(i) {
+		slideIndex = i;
+		
+		document.querySelector('#carousel-pic-main').src = images[i];
+		document.querySelectorAll('.carousel-pic').forEach(pic => {
+			pic.classList.remove('border-2');
+		})
+		document.querySelector(`#carousel-pic-${i}`).classList.add('border-2');
+
+		document.querySelector('#carousel-pics-arrow-left').classList.remove('disabledContent');
+		document.querySelector('#carousel-pics-arrow-right').classList.remove('disabledContent');
+		if (slideIndex === 0) {
+			document.querySelector('#carousel-pics-arrow-left').classList.add('disabledContent');
+		} else if (slideIndex === len -1) {
+			document.querySelector('#carousel-pics-arrow-right').classList.add('disabledContent');
+		}
+	}
+
+	for (let i = 0; i < len; i++) {
+		document.querySelector(`#carousel-pic-${i}`).addEventListener('click', () => {
+			changePicture(i);
+		})
+	}
+
+	function moveCarouselLeft() {
+		slideIndex--;
+		changePicture(slideIndex);
+	}
+
+	function moveCarouselRight() {
+		slideIndex++;
+		changePicture(slideIndex);
+	}
+
+	document.querySelector('#carousel-pics-arrow-left').addEventListener('click', moveCarouselLeft)
+	document.querySelector('#carousel-pics-arrow-right').addEventListener('click', moveCarouselRight)
+
+/*
+	// Swipe for Mobile devices
+	let touchstartX = 0
+	let touchendX = 0
+			
+	function checkDirection() {
+		if (touchendX < touchstartX) { (slideIndex > 0) && moveCarouselLeft(); } // swiped left
+		if (touchendX > touchstartX) { (slideIndex < len-1) && moveCarouselRight(); } //swiped right
+	}
+
+	if (screen.width < 768) { // swipe is working only for Mobile version
+		document.querySelector('#carousel-pic-main').addEventListener('touchstart', e => {
+			touchstartX = e.changedTouches[0].screenX
+		})
+
+		document.querySelector('#carousel-pic-main').addEventListener('touchend', e => {
+			touchendX = e.changedTouches[0].screenX
+			checkDirection()
+		})
+	}
+	*/
+</script>

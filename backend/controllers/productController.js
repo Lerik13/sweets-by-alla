@@ -5,6 +5,14 @@ import { Product } from '../models/productModel.js';
 // @desc		Fetch all products
 // @route		GET /api/products
 // @access	Public
+const getAllProducts = asyncHandler(async (req, res) => {
+	const products = await Product.find({});
+	res.json(products);
+});
+
+// @desc		Fetch all products
+// @route		GET /api/products
+// @access	Public
 const getProducts = asyncHandler(async (req, res) => {
 	const pageSize = process.env.PAGINATION_LIMIT // pagination: how many products show in 1 page
 	const page = Number(req.query.pageNumber) || 1;
@@ -127,6 +135,7 @@ const getProductsByCategoryForCatalog = asyncHandler(async (req, res) => {
 
 
 export {
+	getAllProducts,
 	getProducts,
 	getProductById,
 	createProduct,

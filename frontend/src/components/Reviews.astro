@@ -18,7 +18,7 @@ console.log(len)
 <div class="relative flex flex-col overflow-hidden">
 	<div class="flex md:justify-end px-4 mt-4">
 		<div class="w-[9rem] h-[5rem] flex justify-between items-center">
-			<button  id="reviews-arrow-left" class="disabledContent arrow w-[36px] h-[36px]  transition-all duration-300 ease-out rounded-full border border-veryLightGray text-gray-600">
+			<button  id="reviews-arrow-left" class="disabledContent arrow w-[36px] h-[36px] transition-all duration-300 ease-out rounded-full border border-veryLightGray text-gray-600">
 				<Icon name="ri:arrow-left-s-line" width="36px" class="" />
 			</button>
 			<div class="text-base">
@@ -76,49 +76,42 @@ console.log(len)
 	calcShift();
 	window.addEventListener("resize", calcShift);
 
-	function moveSliderLeft() {
-		if (!document.querySelector('#reviews-arrow-left').classList.contains('disabledContent')) {
-			// enable buttons left & right
-			document.querySelector('#reviews-arrow-left').classList.remove('disabledContent');
-			document.querySelector('#reviews-arrow-right').classList.remove('disabledContent');
+	function changeSlide(i) {
+		slideIndex = i;
 
-			slideIndex--;
-
-			if (slideIndex === 0) {
-				document.querySelector('#reviews-arrow-left').classList.add('disabledContent');
-			}
-
-			document.querySelector('.reviews').style.transform = `translate(-${shift * slideIndex}${unit})`;
-			document.querySelector('#reviews-number').innerHTML = slideIndex + 1;
+		document.querySelector('#reviews-arrow-left').classList.remove('disabledContent');
+		document.querySelector('#reviews-arrow-right').classList.remove('disabledContent');
+		if (slideIndex === 0) {
+			document.querySelector('#reviews-arrow-left').classList.add('disabledContent');
 		}
+		if (slideIndex === len-1) {
+			document.querySelector('#reviews-arrow-right').classList.add('disabledContent');
+		}
+
+		document.querySelector('.reviews').style.transform = `translate(-${shift * slideIndex}${unit})`;
+		document.querySelector('#reviews-number').innerHTML = slideIndex + 1;
+	}
+
+	function moveSliderLeft() {
+		slideIndex--;
+		changeSlide(slideIndex);
 	}
 
 	function moveSliderRight() {
-		if (!document.querySelector('#reviews-arrow-right').classList.contains('disabledContent')) {
-			// enable buttons left & right
-			document.querySelector('#reviews-arrow-left').classList.remove('disabledContent');
-			document.querySelector('#reviews-arrow-right').classList.remove('disabledContent');
-
-			slideIndex++;
-			
-			if (slideIndex === len - 1) {
-				document.querySelector('#reviews-arrow-right').classList.add('disabledContent');
-			}
-			document.querySelector('.reviews').style.transform = `translate(-${shift * slideIndex}${unit})`;
-			document.querySelector('#reviews-number').innerHTML = slideIndex + 1;
-		}
+		slideIndex++;
+		changeSlide(slideIndex);
 	}
 
 	document.querySelector('#reviews-arrow-left').addEventListener('click', moveSliderLeft)
 	document.querySelector('#reviews-arrow-right').addEventListener('click', moveSliderRight)
 
-	
+	// Swipe for Mobile devices
 	let touchstartX = 0
 	let touchendX = 0
 			
 	function checkDirection() {
-		if (touchendX < touchstartX) { moveSliderLeft(); } // swiped left
-		if (touchendX > touchstartX) { moveSliderRight(); } //swiped right
+		if (touchendX < touchstartX) { (slideIndex > 0) && moveSliderLeft(); } // swiped left
+		if (touchendX > touchstartX) { (slideIndex < len-1) && moveSliderRight(); } //swiped right
 	}
 
 	if (screen.width < 768) { // swipe is working only for Mobile version
