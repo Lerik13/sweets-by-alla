@@ -5,7 +5,6 @@ import { BASE_URL, PRODUCTS_ALL_URL } from '../../constants';
 import Layout from '../../layouts/Layout.astro';
 import Button from '../../components/Button.astro';
 import CarouselPictures from '../../components/CarouselPictures.astro';
-import { Product } from "../../types/product";
 
 export async function getStaticPaths() {
 	const products = await fetch(BASE_URL + PRODUCTS_ALL_URL).then(res => res.json());
@@ -17,8 +16,19 @@ export async function getStaticPaths() {
 		};
 	});
 }
+interface ProductData {
+	_id: number;
+	name: string;
+	image: string;
+	images?: string[];
+	category: string;
+	description?: string;
+	ingredients?: string;
+	rating: number;
+	order: number;
+};
 interface Props {
-	product: Product;
+	product: ProductData;
 }
 
 const { id } = Astro.params;

@@ -7,15 +7,15 @@ import ProductElement from './ProductElement';
 import Loader from './Loader';
 import Button from './Button';
 
-export function ProductList({ param_category }) {
+export function ProductList({ param_category = 'cake' }) {
 	const [isFirstLoad, setIsFirstLoad] = useState(true);
 		
 	if (isFirstLoad) {
 		if (param_category) {
 			categoryy.set(param_category);
-		} else {
+		} /*else {
 			categoryy.set('cake');
-		}
+		}*/
 		setIsFirstLoad(false);
 	}
 	const category = useStore(categoryy);

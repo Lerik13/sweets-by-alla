@@ -4,11 +4,12 @@ export const prerender = false;
 import { Image } from "astro:assets";
 import { Icon } from 'astro-icon';
 import { BASE_URL, REVIEWS_URL } from '../constants';
-import { isLeftHandSideExpression } from "typescript";
 
 type ReviewData = {
 	_id: number;
-	title: string;
+	name?: string;
+	title?: string;
+	comment?: string;
 	image: string;
 };
 

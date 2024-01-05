@@ -1,6 +1,4 @@
 
-import { BASE_URL } from '../constants';
-
 const ProductElement = ({ id, name, image }) => {
 
 	return (

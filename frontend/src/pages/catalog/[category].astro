@@ -1,9 +1,8 @@
 ---
 //export const prerender = false;
 
-import { BASE_URL, CATEGORY_URL, PRODUCTS_URL } from '../../constants';
+import { BASE_URL, CATEGORY_URL } from '../../constants';
 import Layout from '../../layouts/Layout.astro';
-import { Category, ProductType } from "../../types/product";
 import { ProductList } from '../../components/ProductList';
 
 export async function getStaticPaths() {
@@ -17,8 +16,13 @@ export async function getStaticPaths() {
 	});
 }
 
+type CategoryType = {
+	name: string;
+	description?: string;
+	order: number;
+};
 interface Props {
-	c: Category;
+	c: CategoryType;
 }
 const { category } = Astro.params;
 const { c } = Astro.props;
