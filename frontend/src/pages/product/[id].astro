@@ -29,7 +29,7 @@ const { product } = Astro.props;
 	<div class="container flex flex-col px-6 mx-auto space-y-6">
 		<div class="">
 			<a href="/" class="hover:text-brightRed">Home</a> <span class="px-2">&gt;</span>
-			<a href="/#catalog" class="hover:text-brightRed">Catalog</a> <span class="px-2">&gt;</span>
+			<a href="/catalog" class="hover:text-brightRed">Catalog</a> <span class="px-2">&gt;</span>
 			<a href=`/catalog/${product.category}` class="hover:text-brightRed">{product.category[0].toUpperCase()+product.category.substring(1)+'s'}</a> <span class="px-2">&gt;</span>
 			<span class="text-gray-400">{product.name}</span>
 		</div>
