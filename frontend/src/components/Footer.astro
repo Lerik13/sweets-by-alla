@@ -4,7 +4,7 @@ import { Icon } from 'astro-icon';
 import contactData from '../data/contactData';
 ---
 
-<footer id="contacts" data-anchor="contacts" class="bg-navColor flex mt-16 md:mt-20">
+<footer id="contacts" data-anchor="contacts" class=" bg-navColor flex"> {/* mt-16 md:mt-20 */}
 	<div class="container flex mx-auto pt-[1rem] pb-[4rem]">
 		<div class="flex flex-col md:flex-row justify-between gap-8 md:gap-1 w-full">
 			<div class="md:w-1/3 flex justify-center md:justify-start">
@@ -56,3 +56,9 @@ import contactData from '../data/contactData';
 		</div>
 	</div>
 </footer>
+
+<style>
+	footer {
+		margin-top: auto;
+	}
+</style>

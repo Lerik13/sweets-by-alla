@@ -16,17 +16,33 @@ const getAllProducts = asyncHandler(async (req, res) => {
 const getProducts = asyncHandler(async (req, res) => {
 	const pageSize = process.env.PAGINATION_LIMIT // pagination: how many products show in 1 page
 	const page = Number(req.query.pageNumber) || 1;
+	const category = req.query?.category || "";
+//console.log("req.query:", req.query);
+//console.log("req.params:", req.params);
+	//const category = req.params?.category || "";
+	//console.log("API: category = ", category)
 
 	const keyword = req.query.keyword
 		? { name: { $regex: req.query.keyword, $options: 'i' } }
 		: {}
+	
+	let count;
 
-	const count = await Product.countDocuments({...keyword});
+	if (category === "") {
+		count = await Product.countDocuments({...keyword});
 
-	const products = await Product.find({...keyword})
-		.limit(pageSize)
-		.skip(pageSize * (page - 1));
-	res.json({ products, page, pages: Math.ceil(count / pageSize) });
+		const products = await Product.find({...keyword})
+			.limit(pageSize)
+			.skip(pageSize * (page - 1));
+		res.json({ products, page, pages: Math.ceil(count / pageSize) });
+	} else {
+		count = await Product.countDocuments({ category: category });
+	
+		const products = await Product.find({ category: category })
+			.limit(pageSize)
+			.skip(pageSize * (page - 1));
+		res.json({ products, page, pages: Math.ceil(count / pageSize) });
+	}
 });
 
 // @desc		Fetch a product
@@ -111,17 +127,6 @@ const getTopProducts = asyncHandler(async (req, res) => {
 	res.status(200).json(products);
 });
 
-// @desc		Get products by category
-// @route		GET /api/products/category/
-// @access	Public
-const getProductsByCategory = asyncHandler(async (req, res) => {
-	const category = req.params.category;
-
-	const products = await Product.find({ category: category }).sort({ order: 1 });
-	
-	res.status(200).json(products);
-});
-
 // @desc		Get products by category for "Catalog" on main page
 // @route		GET /api/products/category/
 // @access	Public
@@ -142,6 +147,5 @@ export {
 	updateProduct,
 	deleteProduct,
 	getTopProducts,
-	getProductsByCategory,
 	getProductsByCategoryForCatalog
 }

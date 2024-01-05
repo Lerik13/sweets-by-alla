@@ -1,6 +1,8 @@
 ---
-import { Image } from "astro:assets";
+export const prerender = false;
+
 import Button from './Button.astro';
+import ProductCard from './ProductCard.astro';
 import { BASE_URL, CATALOG_URL } from '../constants';
 
 interface Props {
@@ -19,50 +21,23 @@ const {
 
 const res = await fetch(BASE_URL + CATALOG_URL + category);
 const products = await res.json();
-
-//const images = import.meta.glob('/src/assets/hero/*.{jpeg,jpg,png,gif}')
 ---
+
 <div
 	role="tabpanel"
 	id={id}
 	class={active ? "tab-panel flex flex-col transition duration-300 w-full" : "tab-panel w-full invisible absolute top-0 opacity-0 transition duration-300"}
 >
-	<div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 ">
-		<a href={'/product/' + products[1]._id} class="h-[14rem] lg:h-[16rem] xl:h-[22rem] overflow-hidden flex flex-col">
-			<div class="overflow-hidden h-[12rem] lg:h-[14rem] xl:h-[20rem]">
-				<Image src={products[1].image} alt={products[1].name} width="300" height="300" class="object-cover w-full h-full hover:scale-110 transition-all duration-300 ease-out" />
-			</div>
-			<span class="font-medium pl-2 flex items-center h-[2rem] truncate">{products[1].name}</span>
-		</a>
-		<a href={'/product/' + products[2]._id} class="h-[14rem] lg:h-[16rem] xl:h-[22rem] overflow-hidden">
-			<div class="overflow-hidden h-[12rem] lg:h-[14rem] xl:h-[20rem]">
-				<Image src={products[2].image} alt={products[2].name} width="300" height="300" class="object-cover w-full h-full hover:scale-110 transition-all duration-300 ease-out" />
-			</div>
-			<span class="font-medium pl-2 flex items-center h-[2rem] truncate">{products[2].name}</span>
-		</a>
-		<a href={'/product/' + products[0]._id} class="flex flex-col h-[20rem] md:h-[29rem] lg:h-[33rem] xl:h-[45rem] col-span-2 row-span-2 ">
-			<div class="overflow-hidden h-[18rem] md:h-[27rem] lg:h-[31rem] xl:h-[43rem]">
-				<Image src={products[0].image} alt={products[0].name} width="300" height="300" class="object-cover w-full h-full hover:scale-110 transition-all duration-300 ease-out" />
-			</div>
-			<span class="font-medium pl-2 flex items-center h-[2rem] truncate">{products[0].name}</span>
-		</a>
-		<a href={'/product/' + products[3]._id} class="h-[14rem] lg:h-[16rem] xl:h-[22rem] overflow-hidden flex flex-col">
-			<div class="overflow-hidden h-[12rem] lg:h-[14rem] xl:h-[20rem]">
-				<Image src={products[3].image} alt={products[3].name} width="300" height="300" class="object-cover w-full h-full hover:scale-110 transition-all duration-300 ease-out" />
-			</div>
-			<p class="font-medium pl-2 h-[2rem] flex items-center truncate">{products[3].name}</p>
-		</a>
-		<a href={'/product/' + products[4]._id} class="h-[14rem] lg:h-[16rem] xl:h-[22rem] overflow-hidden">
-			<div class="overflow-hidden h-[12rem] lg:h-[14rem] xl:h-[20rem]">
-				<Image src={products[4].image} alt={products[4].name} width="300" height="300" class="object-cover w-full h-full hover:scale-110 transition-all duration-300 ease-out" />
-			</div>
-			<span class="font-medium pl-2 flex items-center h-[2rem] truncate">{products[4].name}</span>
-		</a>
+	<div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+		<ProductCard id={products[1]._id} name={products[1].name} image={products[1].image} />
+		<ProductCard id={products[2]._id} name={products[2].name} image={products[2].image} />
+		<ProductCard id={products[0]._id} name={products[0].name} image={products[0].image} isBigger={true} addStyle="col-span-2 row-span-2" />
+		<ProductCard id={products[3]._id} name={products[3].name} image={products[3].image} />
+		<ProductCard id={products[4]._id} name={products[4].name} image={products[4].image} />
 	</div>
 	<div class="flex justify-center my-5">
 		<div class="flex">
-			<Button text="See more" href={href} />
+			<Button text="See more" href={`/catalog/${category}`} />
 		</div>
 	</div>
-
 </div>

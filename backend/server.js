@@ -11,6 +11,7 @@ import uploadRoutes from './routes/uploadRoutes.js';
 import categoryRoutes from './routes/categoryRoutes.js';
 import heroRoutes from './routes/heroRoutes.js';
 import reviewRoutes from './routes/reviewRoutes.js';
+import cors from 'cors';
 const port = process.env.PORT || 5000;
 
 connectDB();
@@ -23,6 +24,8 @@ app.use(express.urlencoded({ extended: true }))
 
 //Cookie parser middleware
 app.use(cookieParser())
+
+app.use(cors())
 
 app.get('/', (req, res) => {
 	res.send('API is running...');

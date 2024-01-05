@@ -17,8 +17,8 @@ const reviews = [
 	},
 	{
 		image: '/reviews/review_3.jpg',
-		name: 'Mike',
-		title: 'Gluten-free coconut cake for Christmas celebration eve',
+		name: 'Marika',
+		title: 'Gluten-free coconut cake for Pirate party',
 		comment: "Such a stunning cake, you absolutely nailed it! There's no words that can express our gratitude but we thank you! And tasted absolutely amazing! The cake looked absolutely gorgeous and was exactly as we'd envisaged!",
 		order: 3,
 		approved: true

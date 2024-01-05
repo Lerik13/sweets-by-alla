@@ -1,0 +1,40 @@
+---
+//export const prerender = false;
+
+import { BASE_URL, CATEGORY_URL, PRODUCTS_URL } from '../../constants';
+import Layout from '../../layouts/Layout.astro';
+import { Category, ProductType } from "../../types/product";
+import { ProductList } from '../../components/ProductList';
+
+export async function getStaticPaths() {
+	const categories = await fetch(BASE_URL + CATEGORY_URL).then(res => res.json());
+
+	return categories.map((c) => {
+		return {
+			params: { category: c.name },
+			props: { c }
+		};
+	});
+}
+
+interface Props {
+	c: Category;
+}
+const { category } = Astro.params;
+const { c } = Astro.props;
+---
+
+<Layout title={category}>
+	<div class="container flex flex-col px-2 md:px-6 mx-auto space-y-10 lg:space-y-12">
+		<div class="flex flex-col items-center space-y-8">
+			<h2 class="font-serif text-5xl md:text-6xl ">
+				Catalog
+			</h2>
+		</div>
+
+		<ProductList param_category={category} client:load />
+	</div>
+</Layout>
+
+
+

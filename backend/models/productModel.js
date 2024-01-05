@@ -55,6 +55,10 @@ const categorySchema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
+	description: {
+		type: String,
+		required: false,
+	},
 	order: {
 		type: Number,
 		required: true,

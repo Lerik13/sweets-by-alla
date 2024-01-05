@@ -8,7 +8,6 @@ import {
 	updateProduct,
 	deleteProduct,
 	getTopProducts,
-	getProductsByCategory,
 	getProductsByCategoryForCatalog
 } from '../controllers/productController.js';
 import { protect, admin } from '../middleware/authMiddleware.js';
@@ -19,7 +18,6 @@ router.route('/')
 	.post(protect, admin, createProduct);
 router.get('/all', getAllProducts);
 router.get('/top', getTopProducts);
-router.get('/category/:category', getProductsByCategory);
 router.get('/catalog/:category', getProductsByCategoryForCatalog);
 router.route('/:id')
 	.get(checkObjectId, getProductById)

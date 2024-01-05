@@ -1,4 +1,6 @@
 ---
+export const prerender = false;
+
 import { Image } from "astro:assets";
 import { BASE_URL, HERO_URL } from '../constants';
 
@@ -13,6 +15,7 @@ const data: HeroData[] = await res.json();
 
 const images = import.meta.glob('/src/assets/hero/*.{jpeg,jpg,png,gif}')
 ---
+
 <div class="carouselHero h-full relative">
 	{data.map((el, i) => (
 		<div id=`carouselHero-slide-${i}` class="carouselHero-slide w-full h-full relative hidden">

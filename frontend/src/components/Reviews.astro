@@ -1,4 +1,6 @@
 ---
+export const prerender = false;
+
 import { Image } from "astro:assets";
 import { Icon } from 'astro-icon';
 import { BASE_URL, REVIEWS_URL } from '../constants';
@@ -13,7 +15,7 @@ type ReviewData = {
 const res = await fetch(BASE_URL + REVIEWS_URL);
 const data: ReviewData[] = await res.json();
 const len = data.length;
-console.log(len)
+
 ---
 <div class="relative flex flex-col overflow-hidden">
 	<div class="flex md:justify-end px-4 mt-4">

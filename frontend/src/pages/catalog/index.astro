@@ -1,0 +1,19 @@
+---
+//export const prerender = false;
+
+import { ProductList } from '../../components/ProductList';
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Catalog of sweets">
+	<div class="container flex flex-col px-2 md:px-6 mx-auto space-y-10 lg:space-y-12">
+		<div class="flex flex-col items-center space-y-8">
+			<h2 class="font-serif text-5xl md:text-6xl ">
+				Catalog
+			</h2>
+		</div>
+
+		<ProductList  client:load />
+	</div>
+</Layout>
+
