@@ -31,7 +31,7 @@ const products = [
   },
   {
     name: 'Chocolate Mousse Cake with baileys',
-    image: '/products/cake/chocolate_mousse_cake_with baileys.jpg',
+    image: '/products/cake/chocolate_mousse_cake_with_baileys.jpg',
     images: [],
     category: 'cake',
     description: 'This chocolate Mousse cake features my signature high altitude chocolate cake, frosted with fluffy coconut cream cheese buttercream, covered in crunchy coconut flakes and chopped dark chocolate. I love how easy it is to decorate a coconut cake, yet it still manages to look so pretty!',
