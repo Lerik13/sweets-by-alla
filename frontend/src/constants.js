@@ -1,4 +1,4 @@
-export const BASE_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : '';
+export const BASE_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : 'https://sweets-by-alla.onrender.com';
 //export const BASE_URL = ''; // If using proxy
 export const HERO_URL = '/api/hero';
 export const USERS_URL = '/api/users';
