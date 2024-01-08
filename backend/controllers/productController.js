@@ -14,7 +14,7 @@ const getAllProducts = asyncHandler(async (req, res) => {
 // @route		GET /api/products
 // @access	Public
 const getProducts = asyncHandler(async (req, res) => {
-	const pageSize = process.env.PAGINATION_LIMIT // pagination: how many products show in 1 page
+	const pageSize = Number(process.env.PAGINATION_LIMIT) // pagination: how many products show in 1 page
 	const page = Number(req.query.pageNumber) || 1;
 	const category = req.query?.category || "";
 
@@ -124,12 +124,23 @@ const getTopProducts = asyncHandler(async (req, res) => {
 });
 
 // @desc		Get products by category for "Catalog" on main page
-// @route		GET /api/products/category/
+// @route		GET /api/products/category/:category
 // @access	Public
 const getProductsByCategoryForCatalog = asyncHandler(async (req, res) => {
 	const category = req.params.category;
 
 	const products = await Product.find({ category: category }).sort({ order: 1 }).limit(5);
+	
+	res.status(200).json(products);
+});
+
+// @desc		Get 5 random products for section "You might also like"
+// @route		GET /api/products/random/
+// @access	Public
+const getRandomProducts = asyncHandler(async (req, res) => {
+	const count = Number(process.env.RANDOM_PRODUCTS);
+
+	const products = await Product.aggregate([{ $sample: {size: count} }]);
 	
 	res.status(200).json(products);
 });
@@ -143,5 +154,6 @@ export {
 	updateProduct,
 	deleteProduct,
 	getTopProducts,
-	getProductsByCategoryForCatalog
+	getProductsByCategoryForCatalog,
+	getRandomProducts
 }

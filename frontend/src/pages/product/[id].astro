@@ -5,6 +5,7 @@ import { BASE_URL, PRODUCTS_ALL_URL } from '../../constants';
 import Layout from '../../layouts/Layout.astro';
 import Button from '../../components/Button.astro';
 import CarouselPictures from '../../components/CarouselPictures.astro';
+import CarouselRandomProducts from '../../components/CarouselRandomProducts.astro';
 
 export async function getStaticPaths() {
 	const products = await fetch(BASE_URL + PRODUCTS_ALL_URL).then(res => res.json());
@@ -37,7 +38,7 @@ const { product } = Astro.props;
 
 <Layout title={product.name}>
 	<div class="container flex flex-col px-6 mx-auto space-y-6">
-		<div class="">
+		<div class="pt-2">
 			<a href="/" class="hover:text-brightRed">Home</a> <span class="px-2">&gt;</span>
 			<a href="/catalog" class="hover:text-brightRed">Catalog</a> <span class="px-2">&gt;</span>
 			<a href=`/catalog/${product.category}` class="hover:text-brightRed">{product.category[0].toUpperCase()+product.category.substring(1)+'s'}</a> <span class="px-2">&gt;</span>
@@ -62,5 +63,7 @@ const { product } = Astro.props;
 				</div>
 			</div>
 		</div>
+
+		<CarouselRandomProducts />
 	</div>
 </Layout>

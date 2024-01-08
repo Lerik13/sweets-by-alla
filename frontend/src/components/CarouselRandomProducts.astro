@@ -1,0 +1,89 @@
+---
+//export const prerender = true;
+
+import Icon from 'astro-icon';
+import { BASE_URL, PRODUCTS_RANDOM_URL } from '../constants';
+import ProductCard from './ProductCard.astro';
+
+const res = await fetch(BASE_URL + PRODUCTS_RANDOM_URL);
+const products = await res.json();
+const len = products.length;
+---
+
+<div class="pt-10 flex flex-col space-y-10">
+	<h5 class="font-serif text-2xl flex justify-center">
+		You might also like
+	</h5>
+	<div class="relative flex">
+		<div class="flex overflow-hidden w-full mx-[3.2rem]">
+			<div class="carousel-random flex gap-[2rem] lg:gap-[3rem] xl:gap-[5.1rem] md:px-[0.5rem] lg:px-[0.2rem] xl:px-[5.3rem] transition-all duration-300 ease-out">
+				{products.map(product => (
+					<ProductCard id={product._id} name={product.name} image={product.image} addStyle='w-[11rem] lg:w-[15rem] xl:w-[20rem]' />
+				))}
+			</div>
+		</div>
+		<button id="carousel-random-arrow-left" class="disabledContent arrow w-[36px] h-[36px] absolute top-[calc(50%-18px)] left-0 md:left-2 text-gray-500 hover:scale-110 border border-gray-300 rounded-full text-gray-600 transition-all duration-300 ease-out">
+			<Icon name="ri:arrow-left-s-line" width="36px" class="" />
+		</button>
+		<button id="carousel-random-arrow-right" class="arrow w-[36px] h-[36px] absolute top-[calc(50%-18px)] right-0 md:right-2 text-gray-500 hover:scale-110 border border-gray-300 rounded-full text-gray-600 transition-all duration-300 ease-out">
+			<Icon name="ri:arrow-right-s-line" width="36px" class="" />
+		</button>
+	</div>
+</div>
+
+<style>
+	.disabledContent {
+		pointer-events: none;
+		color: var(--veryLightGray);
+	}
+</style>
+
+<script define:vars={{ len }}>
+	let slideIndex = 0;
+	let shift = 11;
+	let limit_right = len-3;
+
+	const calcShift = () => {
+		if (screen.width > 1439) {				// max-w-6xl
+			shift = 26; 
+		} else if (screen.width > 975) {	// max-w-3xl
+			shift = 18;
+		} else if (screen.width > 767) {	// 
+			shift = 13;
+		} else {													// max-w-full
+			shift = 13; 
+			limit_right = len-1;
+		}
+	}
+	calcShift();
+	window.addEventListener("resize", calcShift);
+
+	function changeSlide(i) {
+		slideIndex = i;
+
+		document.querySelector('#carousel-random-arrow-left').classList.remove('disabledContent');
+		document.querySelector('#carousel-random-arrow-right').classList.remove('disabledContent');
+		if (slideIndex === 0) {
+			document.querySelector('#carousel-random-arrow-left').classList.add('disabledContent');
+		}
+		if (slideIndex === limit_right) { 
+			document.querySelector('#carousel-random-arrow-right').classList.add('disabledContent');
+		}
+
+		document.querySelector('.carousel-random').style.transform = `translate(-${shift * slideIndex}rem)`;
+	}
+
+	function moveSliderLeft() {
+		slideIndex--;
+		changeSlide(slideIndex);
+	}
+
+	function moveSliderRight() {
+		slideIndex++;
+		changeSlide(slideIndex);
+	}
+
+	document.querySelector('#carousel-random-arrow-left').addEventListener('click', moveSliderLeft)
+	document.querySelector('#carousel-random-arrow-right').addEventListener('click', moveSliderRight)
+
+</script>
