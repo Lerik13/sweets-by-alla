@@ -16,7 +16,6 @@ const getCategories = asyncHandler(async (req, res) => {
 const createCategory = asyncHandler(async (req, res) => {
 	const name = req.body.name || 'new category';
 	const order = req.body.order || Number(await Category.find({}).sort({order: -1}).limit(1)) + 1;
-//console.log(order);
 
 	const category = new Category({
 		user: req.user._id,

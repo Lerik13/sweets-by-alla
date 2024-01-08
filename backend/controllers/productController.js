@@ -17,10 +17,6 @@ const getProducts = asyncHandler(async (req, res) => {
 	const pageSize = process.env.PAGINATION_LIMIT // pagination: how many products show in 1 page
 	const page = Number(req.query.pageNumber) || 1;
 	const category = req.query?.category || "";
-//console.log("req.query:", req.query);
-//console.log("req.params:", req.params);
-	//const category = req.params?.category || "";
-	//console.log("API: category = ", category)
 
 	const keyword = req.query.keyword
 		? { name: { $regex: req.query.keyword, $options: 'i' } }
@@ -36,9 +32,9 @@ const getProducts = asyncHandler(async (req, res) => {
 			.skip(pageSize * (page - 1));
 		res.json({ products, page, pages: Math.ceil(count / pageSize) });
 	} else {
-		count = await Product.countDocuments({ category: category });
+		count = await Product.countDocuments({ category: category, ...keyword });
 	
-		const products = await Product.find({ category: category })
+		const products = await Product.find({ category: category, ...keyword })
 			.limit(pageSize)
 			.skip(pageSize * (page - 1));
 		res.json({ products, page, pages: Math.ceil(count / pageSize) });

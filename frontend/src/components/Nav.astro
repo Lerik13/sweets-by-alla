@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import { Icon } from 'astro-icon';
+import SearchBox from "./SearchBox";
 ---
 
 <nav class="relative lg:container mx-auto p-6">
@@ -19,12 +20,9 @@ import { Icon } from 'astro-icon';
 			<li><a href="/#contacts" class="pb-2 border-b-2 border-bgColor hover:border-brightRed duration-500 ease-out transition-all">Contacts</a></li>
 		</ul>
 		<!-- Search Input -->
-		<form class="hidden md:flex gap-1">
-			<input class="p-2 border rounded border-veryLightGray w-[10rem] text-sm" id="search" name="search" type="text" placeholder="Search sweets..." required>
-			<button type="submit" class="ml-[2px]">
-				<Icon name="ri:search-line" width="18px" />
-			</button>
-		</form>
+		<div class="hidden md:flex gap-1">
+			<SearchBox client:load />
+		</div>
 
 		<!-- Hamburger Icon -->
 		<button id="menu-btn" class="hamburger block md:hidden focus:outline-none">
@@ -45,12 +43,9 @@ import { Icon } from 'astro-icon';
 					<li><a href="/#how-to-order" class="nav-link hover:text-brightRed">How to order</a></li>
 					<li><a href="/#contacts" class="nav-link hover:text-brightRed">Contacts</a></li>
 				</ul>
-				<form class="flex gap-1 pb-5">
-					<input class="p-2 border rounded border-veryLightGray w-full text-sm" name="search2" type="text" placeholder="Search sweets..." required>
-					<button type="submit" class="ml-[2px]">
-						<Icon name="ri:search-line" width="18px" />
-					</button>
-				</form>
+				<div class="flex justify-center gap-1 pb-5">
+					<SearchBox client:load />
+				</div>
 			</div>
 		</div>
 	</div>
