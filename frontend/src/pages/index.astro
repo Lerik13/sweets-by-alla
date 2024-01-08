@@ -220,13 +220,11 @@ import howToOrderImage from "../assets/images/how-to-order.jpg";
 					<p>
 						Please leave your contact information and we will get back to you as soon as possible
 					</p>
-					<form name="contact" id="form" method="POST" data-netlify="true" class="flex flex-col w-full space-y-5">
+					<form name="contact" id="form-contact" method="POST" data-netlify="true" class="flex flex-col w-full space-y-5">
 						<input class="px-5 py-3.5 w-full py-5 bg-veryLightGray rounded-full " id="name" name="name" type="text" placeholder="Name" required>
-						<input class="px-5 py-3.5 w-full py-5 bg-veryLightGray rounded-full " id="phone" name="phone" type="text" placeholder="Phone" required>
+						<input class="px-5 py-3.5 w-full py-5 bg-veryLightGray rounded-full " id="phone" name="phone" type="tel" placeholder="Phone" required>
 						<div class="flex justify-center md:justify-start mt-8">
-						<button type="submit" class="px-12 py-3.5 align-baseline bg-brightRed text-bgColor border rounded-full border-brightRed transition-all duration-500 ease-out">
-							Send
-						</button>
+							<Button isSubmit={true} />
 						</div>
 					</form>
 				</div>

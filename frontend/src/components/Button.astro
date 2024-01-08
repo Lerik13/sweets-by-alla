@@ -7,14 +7,13 @@ interface Props {
 
 const {
 	href='#',
-	text='Contact',
+	text='Send',
 	isSubmit = false
 } = Astro.props as Props;
-
-//<a href={href} class="p-5 align-baseline border hover:px-6 hover:border-brightRed focus:px-6 focus:border-brightRed transition-all duration-500 ease-out">
 ---
+
 {isSubmit ?
-	<button type="submit" class="p-3.5 align-baseline border px-16 hover:px-20 hover:border-brightRed focus:px-20 focus:border-brightRed transition-all duration-500 ease-out">
+	<button type="submit" class="px-12 py-3.5 align-baseline bg-brightRed text-bgColor border rounded-full border-brightRed transition-all duration-500 ease-out">
 		{text}
 	</button>
 :
