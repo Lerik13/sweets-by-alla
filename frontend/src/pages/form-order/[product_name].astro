@@ -1,4 +1,6 @@
 ---
+export const prerender = true;
+
 import { Image } from "astro:assets";
 import Layout from '../../layouts/Layout.astro';
 import Button from '../../components/Button.astro';
@@ -12,7 +14,7 @@ const { product_name } = Astro.params;
 	<div class="container flex mx-auto mt-16 md:mt-20">
 		<div class="w-full md:w-3/5 lg:w-1/2 xl:w-2/5 flex">
 			<div class="flex flex-col justify-center h-full w-full px-[2rem] md:px-[2.5rem] lg:px-[3.5rem] space-y-5">
-				<h2 class="font-serif text-5xl md:text-6xl text-center md:text-left pb-4">
+				<h2 class="font-serif text-4xl md:text-5xl text-center md:text-left pb-4">
 					Place an order
 				</h2>
 				<p>
