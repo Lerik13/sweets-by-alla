@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { FaSearch } from 'react-icons/fa';
 
 const SearchBox = ({ param_keyword = '' }) => {
 	const [keyword, setKeyword] = useState(param_keyword);
@@ -33,7 +32,7 @@ const SearchBox = ({ param_keyword = '' }) => {
 				onKeyUp={(e) => keyUpHandler(e)}
 			/>
 			<a href='/search' className="link-search ml-[6px]" onClick={submitHandler}>
-				<FaSearch />
+				<img src="/search.svg" alt='Search' width='20px' />
 			</a>
 		</div>
 	)
