@@ -1,0 +1,20 @@
+---
+import { Image } from "astro:assets";
+import Layout from '../layouts/Layout.astro';
+import Button from '../components/Button.astro';
+
+import page404Image from "../assets/images/404.jpg";
+---
+<Layout>
+	<div class="container flex flex-col text-center mx-auto">
+		<div class="overflow-hidden mx-auto">
+			<Image src={page404Image} alt="404 page" format="avif" class="object-cover w-full h-full" />
+		</div>
+		<h2 class="font-serif text-3xl my-4">
+			Sorry, this page is eating a donut.
+		</h2>
+		<p class="mt-3 flex justify-center">
+			<Button text="Go Back" href="/" />
+		</p>
+	</div>
+</Layout>
