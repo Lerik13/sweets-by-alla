@@ -80,3 +80,23 @@ body {
 		transition: none;
 	}
 }
+
+.btn {
+	padding: 16px 44px;
+	font: inherit;
+	font-size: 1rem;
+	line-height: 1.5rem;
+	border: none;
+	cursor: pointer;
+	max-width: fit-content;
+	background: var(--brightRed);
+	color: var(--bgColor);
+	border-radius: 34px;
+	transition: box-shadow 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.btn:focus {
+	outline: transparent;
+}
+.btn:where(:hover, :focus-visible) {
+	box-shadow: 0 0 0 4px var(--bgColor), 0 0 0 6px var(--brightRed);
+}
