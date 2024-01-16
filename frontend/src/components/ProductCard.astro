@@ -19,14 +19,20 @@ const {
 ---
 
 {isBigger ? (
-	<a href={`/product/${id}`} class=`h-[20rem] md:h-[29rem] lg:h-[33rem] xl:h-[45rem] overflow-hidden flex flex-col ${addStyle}`>
+	<a href={`/product/${id}`}
+		aria-label="Go to product page"
+		class=`h-[20rem] md:h-[29rem] lg:h-[33rem] xl:h-[45rem] overflow-hidden flex flex-col ${addStyle}`
+	>
 		<div class="overflow-hidden h-[18rem] md:h-[27rem] lg:h-[31rem] xl:h-[43rem]">
 			<Image src={image} alt={name} width="800" height="800" class="object-cover w-full h-full hover:scale-110 transition-all duration-300 ease-out" />
 		</div>
 		<span class="font-medium pl-2 flex items-center h-[2rem] truncate">{name}</span>
 	</a>
 ) : (
-	<a href={`/product/${id}`} class=`h-[14rem] lg:h-[16rem] xl:h-[22rem] overflow-hidden flex flex-col ${addStyle}`>
+	<a href={`/product/${id}`}
+		aria-label="Go to product page"
+		class=`h-[14rem] lg:h-[16rem] xl:h-[22rem] overflow-hidden flex flex-col ${addStyle}`
+	>
 		<div class="overflow-hidden h-[12rem] lg:h-[14rem] xl:h-[20rem]">
 			<Image src={image} alt={name} width="400" height="400" class="object-cover w-full h-full hover:scale-110 transition-all duration-300 ease-out" />
 		</div>

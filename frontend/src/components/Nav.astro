@@ -8,16 +8,16 @@ import SearchBox from "./SearchBox";
 	<!-- Flex container -->
 	<div class="flex items-center justify-between">
 		<!-- Logo -->
-		<a href="/" class="flex justify-center">
+		<a href="/" class="flex justify-center" aria-label="Go to main page">
 			<Image src="/logo2.svg" alt="Logo" width={180} height={50} />
 		</a>
 		<!-- Menu Items -->
 		<ul class="hidden md:flex space-x-3 lg:space-x-10 pl-2 font-medium">
-			<li><a href="/#home" class="pb-2 border-b-2 border-bgColor hover:border-brightRed duration-500 ease-out transition-all">Home</a></li>
-			<li><a href="/#catalog" class="pb-2 border-b-2 border-bgColor hover:border-brightRed duration-500 ease-out transition-all">Catalog</a></li>
-			<li><a href="/#reviews" class="pb-2 border-b-2 border-bgColor hover:border-brightRed duration-500 ease-out transition-all">Reviews</a></li>
-			<li><a href="/#how-to-order" class="pb-2 border-b-2 border-bgColor hover:border-brightRed duration-500 ease-out transition-all">How to order</a></li>
-			<li><a href="/#contacts" class="pb-2 border-b-2 border-bgColor hover:border-brightRed duration-500 ease-out transition-all">Contacts</a></li>
+			<li><a href="/#home" aria-label="Go to main page" class="pb-2 border-b-2 border-bgColor hover:border-brightRed duration-500 ease-out transition-all">Home</a></li>
+			<li><a href="/#catalog" aria-label="Watch all sweet products in Catalog" class="pb-2 border-b-2 border-bgColor hover:border-brightRed duration-500 ease-out transition-all">Catalog</a></li>
+			<li><a href="/#reviews" aria-label="Read reviews from clients" class="pb-2 border-b-2 border-bgColor hover:border-brightRed duration-500 ease-out transition-all">Reviews</a></li>
+			<li><a href="/#how-to-order" aria-label="How to order form" class="pb-2 border-b-2 border-bgColor hover:border-brightRed duration-500 ease-out transition-all">How to order</a></li>
+			<li><a href="/#contacts" aria-label="Contact information" class="pb-2 border-b-2 border-bgColor hover:border-brightRed duration-500 ease-out transition-all">Contacts</a></li>
 		</ul>
 		<!-- Search Input -->
 		<div class="hidden md:flex gap-1">
@@ -37,11 +37,11 @@ import SearchBox from "./SearchBox";
 
 			<div id="slideover"class="absolute w-64 h-full flex flex-col justify-between px-5 pt-20 space-y-10 bg-bgColor top-0 right-0 translate-x-full duration-500 ease-out transition-all overflow-scroll">
 				<ul class="font-medium flex flex-col items-center space-y-10">
-					<li><a href="/#home" class="nav-link hover:text-brightRed">Home</a></li>
-					<li><a href="/#catalog" class="nav-link hover:text-brightRed">Catalog</a></li>
-					<li><a href="/#reviews" class="nav-link hover:text-brightRed">Reviews</a></li>
-					<li><a href="/#how-to-order" class="nav-link hover:text-brightRed">How to order</a></li>
-					<li><a href="/#contacts" class="nav-link hover:text-brightRed">Contacts</a></li>
+					<li><a href="/#home" aria-label="Go to main page" class="nav-link hover:text-brightRed">Home</a></li>
+					<li><a href="/#catalog" aria-label="Watch all sweet products in Catalog" class="nav-link hover:text-brightRed">Catalog</a></li>
+					<li><a href="/#reviews" aria-label="Read reviews from clients" class="nav-link hover:text-brightRed">Reviews</a></li>
+					<li><a href="/#how-to-order" aria-label="How to order form" class="nav-link hover:text-brightRed">How to order</a></li>
+					<li><a href="/#contacts" aria-label="Contact information" class="nav-link hover:text-brightRed">Contacts</a></li>
 				</ul>
 				<div class="flex justify-center gap-1 pb-5">
 					<SearchBox client:load />

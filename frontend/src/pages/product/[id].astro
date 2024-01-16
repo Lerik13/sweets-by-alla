@@ -39,9 +39,15 @@ const { product } = Astro.props;
 <Layout title={product.name}>
 	<div class="container flex flex-col px-6 mx-auto space-y-6">
 		<div class="pt-2">
-			<a href="/" class="hover:text-brightRed">Home</a> <span class="px-2">&gt;</span>
-			<a href="/catalog" class="hover:text-brightRed">Catalog</a> <span class="px-2">&gt;</span>
-			<a href=`/catalog/${product.category}` class="hover:text-brightRed">{product.category[0].toUpperCase()+product.category.substring(1)+'s'}</a> <span class="px-2">&gt;</span>
+			<a href="/" aria-label="Go to main page" class="hover:text-brightRed">
+				Home
+			</a> <span class="px-2">&gt;</span>
+			<a href="/catalog" aria-label="Watch all sweet products in Catalog" class="hover:text-brightRed">
+				Catalog
+			</a> <span class="px-2">&gt;</span>
+			<a href=`/catalog/${product.category}` aria-label={`Watch all ${product.category} products`} class="hover:text-brightRed">
+				{product.category[0].toUpperCase()+product.category.substring(1)+'s'}
+			</a> <span class="px-2">&gt;</span>
 			<span class="text-gray-400">{product.name}</span>
 		</div>
 		<div class="flex flex-col md:flex-row md:space-x-10 space-y-4 md:space-y-0">

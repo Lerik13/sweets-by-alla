@@ -63,24 +63,7 @@ body {
 	transform: rotate(-45deg) translateY(6px) translate(-6px);
 	width: 24px;
 }
-/* - for animation - */
-.animate-hide {
-	opacity: 0;
-	filter: blur(5px);
-	transform: translateX(-100%);
-	transition: all 1s;
-}
-.animate-show {
-	opacity: 1;
-	filter: blur(0);
-	transform: translateX(0);
-}
-@media(peferes-reduced-motion) {
-	.animate-hide {
-		transition: none;
-	}
-}
-
+/* --- */
 .btn {
 	padding: 16px 44px;
 	font: inherit;

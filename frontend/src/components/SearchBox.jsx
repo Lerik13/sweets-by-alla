@@ -31,7 +31,10 @@ const SearchBox = ({ param_keyword = '' }) => {
 				onChange={(e) => setKeyword(e.target.value)}
 				onKeyUp={(e) => keyUpHandler(e)}
 			/>
-			<a href='/search' className="link-search ml-[6px]" onClick={submitHandler}>
+			<a href='/search'
+				aria-label="Search product"
+				className="link-search ml-[6px]" onClick={submitHandler}
+			>
 				<img src="/search.svg" alt='Search' width='20px' />
 			</a>
 		</div>
