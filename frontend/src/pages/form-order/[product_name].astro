@@ -24,7 +24,7 @@ const { product_name } = Astro.params;
 					<input class="px-5 py-3.5 w-full py-5 bg-veryLightGray rounded-full " id="phone" name="phone" type="tel" placeholder="Phone" required>
 					<textarea id="message" name="message" rows="3" class="px-5 py-3.5 w-full bg-veryLightGray rounded-3xl" placeholder="Message">{product_name}</textarea>
 					<div class="flex justify-center md:justify-start mt-8">
-						<Button isSubmit={true} />
+						<Button isSubmit={true} desc="Send your contact information" />
 					</div>
 				</form>
 			</div>

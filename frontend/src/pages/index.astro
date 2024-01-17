@@ -32,7 +32,7 @@ import howToOrderImage from "../assets/images/how-to-order.jpg";
 						Suitable for both holidays and regular days. Delicious!
 					</p>
 					<div class="flex">
-						<Button text="Order now" href="/#how-to-order" />
+						<Button text="Order now" desc="Go to contact form" href="/#how-to-order" />
 					</div>
 				</div>
 				<div class="flex gap-x-4">
@@ -62,7 +62,7 @@ import howToOrderImage from "../assets/images/how-to-order.jpg";
 			</h2>
 			<div 
 				role="tablist"
-				aria-label="tabs"
+				aria-label="Tabs with Catalog of products by categories"
 				class="w-max mx-auto grid grid-cols-2 md:grid-cols-4 gap-y-3 col-auto items-center px-[3px] overflow-hidden transition md:text-base font-semibold"
 			>
 				<button
@@ -225,7 +225,7 @@ import howToOrderImage from "../assets/images/how-to-order.jpg";
 						<input class="px-5 py-3.5 w-full py-5 bg-veryLightGray rounded-full " id="name" name="name" type="text" placeholder="Name" required>
 						<input class="px-5 py-3.5 w-full py-5 bg-veryLightGray rounded-full " id="phone" name="phone" type="tel" placeholder="Phone" required>
 						<div class="flex justify-center md:justify-start mt-8">
-							<Button isSubmit={true} />
+							<Button isSubmit={true} desc="Send your contact information" />
 						</div>
 					</form>
 				</div>

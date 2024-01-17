@@ -3,6 +3,7 @@ const Button = ({ text, onClickHandler }) => {
 		<button
 			onClick={onClickHandler}
 			className="btn"
+			ariaLabel={text}
 		>
 			{text}
 		</button>

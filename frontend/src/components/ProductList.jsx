@@ -75,6 +75,7 @@ export function ProductList({ param_category = 'cake', param_keyword = '' }) {
 			<div className="w-max mx-auto mt-10 grid grid-cols-2 md:grid-cols-4 gap-y-3 col-auto items-center overflow-hidden transition md:text-base font-semibold">
 				<button
 					id="link-cake"
+					ariaLabel="Show Cakes"
 					onClick={() => changeCategory("cake")}
 					className={category==="cake" ? `${style_active}` : `${style_inactive}`}
 				>
@@ -82,6 +83,7 @@ export function ProductList({ param_category = 'cake', param_keyword = '' }) {
 				</button>
 				<button
 					id="link-cupcake"
+					ariaLabel="Show Cupcakes"
 					onClick={() => changeCategory("cupcake")}
 					className={category==='cupcake' ? `${style_active}` : `${style_inactive}`}
 				>
@@ -89,6 +91,7 @@ export function ProductList({ param_category = 'cake', param_keyword = '' }) {
 				</button>
 				<button
 					id="link-cake-pop"
+					ariaLabel="Show Cake Pops"
 					onClick={() => changeCategory("cake pop")}
 					className={category==="cake pop" ? `${style_active}` : `${style_inactive}`}
 				>
@@ -96,6 +99,7 @@ export function ProductList({ param_category = 'cake', param_keyword = '' }) {
 				</button>
 				<button
 					id="link-gluten-free"
+					ariaLabel="Show Gluten Free Desserts"
 					onClick={() => changeCategory("gluten-free dessert")}
 					className={category==='gluten-free dessert' ? `${style_active}` : `${style_inactive}`}
 				>
@@ -117,7 +121,7 @@ export function ProductList({ param_category = 'cake', param_keyword = '' }) {
 				</div>
 				{ (page < pages) && (
 					<div className='mt-5 flex justify-center'>
-						<Button text="Load more" onClickHandler={loadMore} />
+						<Button text="Load more" desc="Load more products" onClickHandler={loadMore} />
 					</div>
 				)}
 			</div>

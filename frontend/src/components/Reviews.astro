@@ -21,13 +21,13 @@ const len = data.length;
 <div class="relative flex flex-col overflow-hidden">
 	<div class="flex md:justify-end px-4 mt-4">
 		<div class="w-[9rem] h-[5rem] flex justify-between items-center">
-			<button  id="reviews-arrow-left" class="disabledContent arrow w-[36px] h-[36px] transition-all duration-300 ease-out rounded-full border border-veryLightGray text-gray-600">
+			<button  id="reviews-arrow-left" aria-label="Arrow left" class="disabledContent arrow w-[36px] h-[36px] transition-all duration-300 ease-out rounded-full border border-veryLightGray text-gray-600">
 				<Icon name="ri:arrow-left-s-line" width="36px" class="" />
 			</button>
 			<div class="text-base">
 				<span id="reviews-number">1</span> / <span>{len}</span>
 			</div>
-			<button id="reviews-arrow-right" class="arrow w-[36px] h-[36px] transition-all duration-300 ease-out  rounded-full border border-veryLightGray text-gray-600">
+			<button id="reviews-arrow-right" aria-label="Arrow right" class="arrow w-[36px] h-[36px] transition-all duration-300 ease-out  rounded-full border border-veryLightGray text-gray-600">
 				<Icon name="ri:arrow-right-s-line" width="36px" class="" />
 			</button>
 		</div>
