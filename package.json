@@ -1,11 +1,11 @@
 {
   "name": "sweets",
   "version": "1.0.0",
-  "description": "app for selling cakes, built with the MERN-stack",
+  "description": "app for selling cakes, built with the Astro framework + MERN-stack",
   "type": "module",
   "main": "server.js",
   "scripts": {
-		"build": "npm install && npm install --prefix frontend && npm run build --prefix frontend",
+    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend",
     "start": "node backend/server.js",
     "server": "nodemon backend/server.js",
     "client": "npm start --prefix frontend",

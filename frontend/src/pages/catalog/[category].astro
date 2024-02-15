@@ -1,7 +1,9 @@
 ---
+export const prerender = true;
+
 import { BASE_URL, CATEGORY_URL } from '../../constants';
 import Layout from '../../layouts/Layout.astro';
-import { ProductList } from '../../components/ProductList';
+import { ProductCatalog } from '../../components/ProductCatalog';
 
 export async function getStaticPaths() {
 	const categories = await fetch(BASE_URL + CATEGORY_URL).then(res => res.json());
@@ -34,7 +36,7 @@ const { c } = Astro.props;
 			</h2>
 		</div>
 
-		<ProductList param_category={category} client:load />
+		<ProductCatalog param_category={category} client:load />
 	</div>
 </Layout>
 

@@ -14,8 +14,8 @@ const getAllProducts = asyncHandler(async (req, res) => {
 // @route		GET /api/products
 // @access	Public
 const getProducts = asyncHandler(async (req, res) => {
-	const pageSize = Number(process.env.PAGINATION_LIMIT) // pagination: how many products show in 1 page
-	const page = Number(req.query.pageNumber) || 1;
+	const pageLimit = Number(process.env.PAGINATION_LIMIT) // pagination: how many products show in 1 page
+	const page = Number(req.query.page) || 1;
 	const category = req.query?.category || "";
 
 	const keyword = req.query.keyword
@@ -24,20 +24,22 @@ const getProducts = asyncHandler(async (req, res) => {
 	
 	let count;
 
-	if (category === "") {
+	if (category === "") { // category not defined
 		count = await Product.countDocuments({...keyword});
 
 		const products = await Product.find({...keyword})
-			.limit(pageSize)
-			.skip(pageSize * (page - 1));
-		res.json({ products, page, pages: Math.ceil(count / pageSize) });
+			.limit(pageLimit)
+			.skip(pageLimit * (page - 1));
+		res.json(products);
+		//res.json({ products, page, pages: Math.ceil(count / pageLimit) });
 	} else {
 		count = await Product.countDocuments({ category: category, ...keyword });
 	
 		const products = await Product.find({ category: category, ...keyword })
-			.limit(pageSize)
-			.skip(pageSize * (page - 1));
-		res.json({ products, page, pages: Math.ceil(count / pageSize) });
+			.limit(pageLimit)
+			.skip(pageLimit * (page - 1));
+		res.json(products);
+		//res.json({ products, page, pages: Math.ceil(count / pageLimit) });
 	}
 });
 

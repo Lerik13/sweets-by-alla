@@ -7,15 +7,15 @@ import {
 	updateHero,
 	deleteHero
 } from '../controllers/heroController.js';
-import { protect, admin } from '../middleware/authMiddleware.js';
+import { protect, admin, editor } from '../middleware/authMiddleware.js';
 import checkObjectId from '../middleware/checkObjectId.js';
 
 router.route('/')
 	.get(getHero)
-	.post(protect, admin, createHero);
+	.post(protect, admin, editor, createHero);
 router.route('/:id')
 	.get(checkObjectId, getHeroById)
-	.put(protect, admin, checkObjectId, updateHero)
-	.delete(protect, admin, checkObjectId, deleteHero);
+	.put(protect, admin, editor, checkObjectId, updateHero)
+	.delete(protect, admin, editor, checkObjectId, deleteHero);
 
 export default router;

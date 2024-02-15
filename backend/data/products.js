@@ -50,6 +50,16 @@ const products = [
 		order: 4,
   },
   {
+    name: 'Ferrero Raffaello Cake',
+    image: '/products/cake/rafaello_cake_.jpg',
+    images: ['/products/cake/rafaello_cake_1.jpg', '/products/cake/rafaello_cake_2.jpg', '/products/cake/rafaello_cake_3.jpg'],
+    category: 'cake',
+    description: 'This Ferrero Raffaello cake is super moist and the perfect combination of almond and coconut. If you love the candy, you’ll love the cake!',
+		ingredients: 'coconut, butter, cream cheese, almond, eggs, salt, sugar, flour, vanilla',
+		rating: 4.5,
+		order: 5,
+  },
+  {
     name: 'Vanilla Cake with macaroons',
     image: '/products/cake/cake_with_macaroons.jpg',
     images: [],

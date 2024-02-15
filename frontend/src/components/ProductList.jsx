@@ -1,31 +1,35 @@
 import { useState } from 'react';
 import { useStore } from "@nanostores/react";
-import { useQuery } from "@tanstack/react-query";
-import { client, categoryy, pageNumber, keywordSearch, productsList } from "./store";
-import { getProducts, getCategories } from '../api/products';
+//import { useQuery } from "@tanstack/react-query";
+import { client, categorySelected, pageNumber, keywordSearch, productsList } from "../services/store";
+import { useProducts, useCategories } from "../services/queries";
+
+//import { getProducts, getCategories } from '../api/products';
+//import { getProducts, getCategories } from '../services/api';
 import ProductElement from './ProductElement';
 import SearchBox from './SearchBox';
 import Loader from './Loader';
 import Button from './Button';
 
-export function ProductList({ param_category = 'cake', param_keyword = '' }) {
+export function ProductList({ products }) {
+/*	
 	const [isFirstLoad, setIsFirstLoad] = useState(true);
 
 	if (isFirstLoad) {
-		categoryy.set(param_category);
+		categorySelected.set(param_category);
 		keywordSearch.set(param_keyword);
 		setIsFirstLoad(false);
 	}
 
-	const category = useStore(categoryy) || "";
+	const category = useStore(categorySelected) || "";
 	const page = useStore(pageNumber) || 1;
 	const keyword = useStore(keywordSearch) || "";
 	const storeProducts = useStore(productsList);
 
-	const categoriesQuery = useCategory();
+	const categoriesQuery = useCategories();
 	const categories = categoriesQuery?.data || [];
 
-	const productsQuery = useProduct(category, page, keyword);
+	const productsQuery = useProducts(category, page, keyword);
 	const products = productsQuery?.data?.products || [];
 	const pages = productsQuery?.data?.pages || 1;
 
@@ -42,7 +46,7 @@ export function ProductList({ param_category = 'cake', param_keyword = '' }) {
 
 	const changeCategory = (category) => {
 		pageNumber.set(1);
-		categoryy.set(category);
+		categorySelected.set(category);
 		productsList.set([]);
 	}
 
@@ -52,7 +56,7 @@ export function ProductList({ param_category = 'cake', param_keyword = '' }) {
 
 	const style_inactive = 'flex justify-center h-10 px-6 border-b border-veryLightGray';
 	const style_active = 'flex justify-center h-10 px-6 border-b text-brightRed border-brightRed';
-
+*/
 	return (
 	<div className="flex flex-col space-y-10">
 		{(keyword !== '') ? (
@@ -75,7 +79,7 @@ export function ProductList({ param_category = 'cake', param_keyword = '' }) {
 			<div className="w-max mx-auto mt-10 grid grid-cols-2 md:grid-cols-4 gap-y-3 col-auto items-center overflow-hidden transition md:text-base font-semibold">
 				<button
 					id="link-cake"
-					ariaLabel="Show Cakes"
+					aria-label="Show Cakes"
 					onClick={() => changeCategory("cake")}
 					className={category==="cake" ? `${style_active}` : `${style_inactive}`}
 				>
@@ -83,7 +87,7 @@ export function ProductList({ param_category = 'cake', param_keyword = '' }) {
 				</button>
 				<button
 					id="link-cupcake"
-					ariaLabel="Show Cupcakes"
+					aria-label="Show Cupcakes"
 					onClick={() => changeCategory("cupcake")}
 					className={category==='cupcake' ? `${style_active}` : `${style_inactive}`}
 				>
@@ -91,7 +95,7 @@ export function ProductList({ param_category = 'cake', param_keyword = '' }) {
 				</button>
 				<button
 					id="link-cake-pop"
-					ariaLabel="Show Cake Pops"
+					aria-label="Show Cake Pops"
 					onClick={() => changeCategory("cake pop")}
 					className={category==="cake pop" ? `${style_active}` : `${style_inactive}`}
 				>
@@ -99,7 +103,7 @@ export function ProductList({ param_category = 'cake', param_keyword = '' }) {
 				</button>
 				<button
 					id="link-gluten-free"
-					ariaLabel="Show Gluten Free Desserts"
+					aria-label="Show Gluten Free Desserts"
 					onClick={() => changeCategory("gluten-free dessert")}
 					className={category==='gluten-free dessert' ? `${style_active}` : `${style_inactive}`}
 				>
@@ -127,25 +131,5 @@ export function ProductList({ param_category = 'cake', param_keyword = '' }) {
 			</div>
 		)}
 	</div>
-	)
-}
-
-const useProduct = (category, pageNumber, keyword) => {
-	return useQuery(
-		{
-			queryKey: ["products", category, pageNumber, keyword],
-			queryFn: () => getProducts(category, pageNumber, keyword),
-		},
-		client
-	)
-}
-
-const useCategory = () => {
-	return useQuery(
-		{
-			queryKey: ["categories"],
-			queryFn: () => getCategories(),
-		},
-		client
 	)
 }

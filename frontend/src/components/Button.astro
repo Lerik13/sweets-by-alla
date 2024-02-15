@@ -15,11 +15,11 @@ const {
 ---
 
 {isSubmit ?
-	<button type="submit" class="btn" aria-label={desc || text}>
+	<button type="submit" class="btn" aria-label={desc || text} aria-disabled="false">
 		{text}
 	</button>
 :
-	<a href={href} class="btn" aria-label={desc || text}>
+	<a href={href} class="btn" aria-label={desc || text} aria-disabled="false">
 		{text}
 	</a>
 }

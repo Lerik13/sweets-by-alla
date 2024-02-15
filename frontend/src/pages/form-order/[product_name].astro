@@ -18,11 +18,50 @@ const { product_name } = Astro.params;
 				<p>
 					Please leave your contact information and we will get back to you as soon as possible
 				</p>
-				<form name="form-order" id="form-order" method="POST" data-netlify="true" action="/form-order/success" class="flex flex-col w-full space-y-5">
-					<input type="hidden" name="subject" value="SweetsByAlla Order Form" />
-					<input class="px-5 py-3.5 w-full py-5 bg-veryLightGray rounded-full " id="name" name="name" type="text" placeholder="Name" required>
-					<input class="px-5 py-3.5 w-full py-5 bg-veryLightGray rounded-full " id="phone" name="phone" type="tel" placeholder="Phone" required>
-					<textarea id="message" name="message" rows="3" class="px-5 py-3.5 w-full bg-veryLightGray rounded-3xl" placeholder="Message">{product_name}</textarea>
+				<form name="form-order" id="form-order" method="POST" data-netlify="true" action="/form-order/success">
+					<div class="input-wrapper">
+						<input
+							type="text"
+							id="name"
+							name="name"
+							class="form-input"
+							placeholder="Name"
+							autocomplete="given-name"
+							required
+						/>
+						<label for="name" class="form-label">
+							Name
+						</label>
+					</div>
+					<div class="input-wrapper">
+						<input
+							type="tel"
+							id="phone"
+							name="phone"
+							class="form-input"
+							placeholder="Phone Number"
+							autocomplete="phone-fill"
+							required
+						/>
+						<label for="phone" class="form-label">
+							Phone Number
+						</label>
+					</div>
+					<div class="input-wrapper">
+						<textarea
+							id="message"
+							name="message"
+							class="form-input"
+							rows="3"
+							placeholder="Message"
+						>{product_name}</textarea>
+						{/*
+						<textarea id="message" name="message" rows="3" class="px-5 py-3.5 w-full bg-veryLightGray rounded-3xl" placeholder="Message">{product_name}</textarea>
+						 */}
+						<label for="message" class="form-label form-label-textarea">
+							Message
+						</label>
+					</div>
 					<div class="flex justify-center md:justify-start mt-8">
 						<Button isSubmit={true} desc="Send your contact information" />
 					</div>

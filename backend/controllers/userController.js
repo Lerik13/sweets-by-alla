@@ -19,6 +19,7 @@ const authUser = asyncHandler(async (req, res) => {
 			name: user.name,
 			email: user.email,
 			isAdmin: user.isAdmin,
+			isEditor: user.isEditor,
 		})
 	} else {
 		res.status(401);
@@ -53,6 +54,7 @@ const registerUser = asyncHandler(async (req, res) => {
 			name: user.name,
 			email: user.email,
 			isAdmin: user.isAdmin,
+			isEditor: user.isEditor,
 		})
 	} else {
 		res.status(400);
@@ -84,6 +86,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
 			name: user.name,
 			email: user.email,
 			isAdmin: user.isAdmin,
+			isEditor: user.isEditor,
 		})
 
 	} else {
@@ -112,6 +115,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 			name: updatedUser.name,
 			email: updatedUser.email,
 			isAdmin: updatedUser.isAdmin,
+			isEditor: updatedUser.isEditor,
 		})
 
 	} else {
@@ -172,6 +176,7 @@ const updateUser = asyncHandler(async (req, res) => {
 		user.name = req.body.name || user.name;
 		user.email = req.body.email || user.email;
 		user.isAdmin = Boolean(req.body.isAdmin);
+		user.isEditor = Boolean(req.body.isEditor);
 
 		const updatedUser = await user.save();
 		
@@ -180,6 +185,7 @@ const updateUser = asyncHandler(async (req, res) => {
 			name: updatedUser.name,
 			email: updatedUser.email,
 			isAdmin: updatedUser.isAdmin,
+			isEditor: updatedUser.isEditor,
 		})
 	} else {
 		res.status(404);

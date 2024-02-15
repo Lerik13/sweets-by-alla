@@ -35,4 +35,16 @@ const admin = (req, res, next) => {
 
 	}
 }
-export { protect, admin }
+
+// Editor Middleware
+const editor = (req, res, next) => {
+	if (req.user && req.user.isEditor) {
+		next();
+	} else {
+		res.status(401);
+		throw new Error('Not authorized as editor')
+
+	}
+}
+
+export { protect, admin, editor }

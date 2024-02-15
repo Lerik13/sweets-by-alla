@@ -7,15 +7,15 @@ import {
 	updateReview,
 	deleteReview
 } from '../controllers/reviewController.js';
-import { protect, admin } from '../middleware/authMiddleware.js';
+import { protect, admin, editor } from '../middleware/authMiddleware.js';
 import checkObjectId from '../middleware/checkObjectId.js';
 
 router.route('/')
 	.get(getReviews)
-	.post(protect, admin, createReview);
+	.post(protect, admin, editor, createReview);
 router.route('/:id')
 	.get(checkObjectId, getReviewById)
-	.put(protect, admin, checkObjectId, updateReview)
-	.delete(protect, admin, checkObjectId, deleteReview);
+	.put(protect, admin, editor, checkObjectId, updateReview)
+	.delete(protect, admin, editor, checkObjectId, deleteReview);
 
 export default router;

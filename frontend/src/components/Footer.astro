@@ -4,7 +4,7 @@ import { Icon } from 'astro-icon';
 import contactData from '../data/contactData';
 ---
 
-<footer id="contacts" data-anchor="contacts" class=" bg-navColor flex">
+<footer id="contacts" data-anchor="contacts" class="flex bg-navColor">
 	<div class="container flex mx-auto pt-[1rem] pb-[4rem]">
 		<div class="flex flex-col md:flex-row justify-between gap-8 md:gap-1 w-full">
 			<div class="md:w-1/3 flex justify-center md:justify-start">
@@ -41,7 +41,7 @@ import contactData from '../data/contactData';
 					</div>
 				</div>
 			</div>
-			<div class="md:w-1/3 flex flex-col pl-4">
+			<div class="items-center md:items-start md:w-1/3 flex flex-col pl-4">
 				<h4 class="text-lg font-semibold mt-5 mb-3">
 					Contacts
 				</h4>
@@ -52,12 +52,12 @@ import contactData from '../data/contactData';
 					<a href=`mailto:${contactData.email}` aria-label="Contact by email" class="hover:text-brightRed">
 						{contactData.email}
 					</a>
-				</div>
-				<div class="flex items-center mt-5 md:mt-10">
-					<span>website developed by</span>
-					<a href=`${contactData.developer}` target="_blank" aria-label="See who developed this website" class="flex w-[45px] pl-2">
-						<Image src="/kv-logo.svg" alt="Logo Developer" width={81} height={67} class="w-full"/>
-					</a>
+					<div class="flex mt-10">
+						<span>website developed by</span>
+						<a href=`${contactData.developer}` target="_blank" aria-label="See who developed this website" class="flex w-[45px] pl-2">
+							<Image src="/kv-logo.svg" alt="Logo Developer" width={81} height={67} class="w-full"/>
+						</a>
+					</div>
 				</div>
 			</div>
 		</div>

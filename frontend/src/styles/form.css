@@ -1,0 +1,77 @@
+form {
+	display: grid;
+	gap: 1.5rem;
+	width: 100%;
+	text-align: left;
+	padding-block: 0.5rem;
+	font-size: 1.3rem;
+	line-height: 1.5rem;
+	font-family: var(--font-form);
+}
+
+.input-wrapper {
+	position: relative;
+	display: grid;
+	gap: 0.2rem;
+	margin-block-start: 0.6rem;
+}
+
+.form-label {
+	border: 0px solid red;
+	text-transform: uppercase;
+	font-size: 1rem;
+	letter-spacing: 0.05rem;
+	margin-inline: 0.45rem;
+	position: absolute;
+	top: 50%;
+	left: 18px;
+	transform: translateY(-50%);
+	padding: 0 0.35rem;
+	/* padding: 0.1rem 0.35rem; */
+	background-color: var(--veryLightGray);
+	transition: 
+		transform var(--_tspeed_fast) var(--_ttype_squish),
+		background-color var(--_tspeed_fast) var(--_ttype_squish);
+}
+
+.form-input {
+	border: none;
+	border-radius: 1.2rem;
+	/* padding: 0.35em 0.55em; */
+	padding: 14px 14px 14px 30px;
+	width: 100%;
+	/* background-color: yellow; */
+	background-color: var(--veryLightGray);
+	caret-color: var(--brightRed);
+	box-shadow:
+		0 0 0 -0.1em var(--bgColor),
+		0 0 0 -0.2em hsl(var(--accent) / 0.8);
+	transition: box-shadow var(--_tspeed_slow) var(--_ttype_squish);
+}
+
+.form-input::placeholder {
+	opacity: 0;
+}
+
+.form-input:focus {
+	outline: none;
+	box-shadow:
+		0 0 0 0.3em var(--bgColor),
+		0 0 0 0.4em hsl(var(--accent) / 0.8);
+}
+
+.form-input:focus ~ .form-label,
+.form-input:not(:placeholder-shown) ~ .form-label {
+	transform: translate3d(0, -49px, 0);
+	/* transform: translate3d(0, -3.55rem, 0); */
+	background-color: var(--bgColor);
+	color: hsl(var(--accent) / 0.8);
+}
+
+.form-label-textarea {
+	top: 30px;
+}
+.form-input:focus ~ .form-label-textarea,
+.form-input:not(:placeholder-shown) ~ .form-label-textarea {
+	transform: translate3d(0, -54px, 0);
+}

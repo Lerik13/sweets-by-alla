@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { ProductList } from '../../components/ProductList';
+import { ProductSearchResult } from '../../components/ProductSearchResult';
 
 const { keyword } = Astro.params;
 ---
@@ -9,10 +9,10 @@ const { keyword } = Astro.params;
 	<div class="container flex flex-col px-2 md:px-6 mx-auto space-y-10 lg:space-y-12">
 		<div class="flex flex-col items-center space-y-8">
 			<h5 class="font-serif text-3xl md:text-3xl ">
-				Search result of "{keyword}"
+				Search Result
 			</h5>
 		</div>
 
-		<ProductList client:load param_category='' param_keyword={keyword} />
+		<ProductSearchResult param_keyword={keyword} client:load />
 	</div>
 </Layout>

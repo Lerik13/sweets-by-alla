@@ -1,5 +1,7 @@
 ---
-import { ProductList } from '../../components/ProductList';
+export const prerender = true;
+
+import { ProductCatalog } from '../../components/ProductCatalog';
 import Layout from '../../layouts/Layout.astro';
 ---
 
@@ -11,7 +13,6 @@ import Layout from '../../layouts/Layout.astro';
 			</h2>
 		</div>
 
-		<ProductList  client:load />
+		<ProductCatalog client:load />
 	</div>
 </Layout>
-

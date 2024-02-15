@@ -33,7 +33,8 @@ const SearchBox = ({ param_keyword = '' }) => {
 			/>
 			<a href='/search'
 				aria-label="Search product"
-				className="link-search ml-[6px]" onClick={submitHandler}
+				className="link-search ml-[6px]"
+				onClick={submitHandler}
 			>
 				<img src="/search.svg" alt='Search' width='20px' />
 			</a>
@@ -41,4 +42,4 @@ const SearchBox = ({ param_keyword = '' }) => {
 	)
 }
 
-export default SearchBox
+export default SearchBox;
