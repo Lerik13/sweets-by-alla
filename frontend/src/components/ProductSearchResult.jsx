@@ -9,7 +9,7 @@ export function ProductSearchResult({ param_category = '', param_keyword = '' })
 	const [category, setCategory] = useState(param_category);
 	const [keyword_, setKeyword_] = useState(param_keyword);
 	const [keyword, setKeyword] = useState(param_keyword);
-
+	
 	const categoriesQuery = useCategories();
 	const categories = categoriesQuery?.data || [];
 
@@ -19,8 +19,8 @@ export function ProductSearchResult({ param_category = '', param_keyword = '' })
 		setCategory(e.target.value);
 	}
 
-	const style_inactive = 'flex justify-center h-10 px-6 border-b border-veryLightGray';
-	const style_active = 'flex justify-center h-10 px-6 border-b text-brightRed border-brightRed';
+	//const style_inactive = 'flex justify-center h-10 px-6 border-b border-veryLightGray';
+	//const style_active = 'flex justify-center h-10 px-6 border-b text-brightRed border-brightRed';
 
 	const keyUpHandler = (e) => {
 		if (e.key === "Enter") {
@@ -77,27 +77,27 @@ export function ProductSearchResult({ param_category = '', param_keyword = '' })
 			</div>
 		
 			<div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-			{productsQuery.data?.pages.map((group, index) => (
-				<Fragment key={index}>
-					{group.map((product) => (
-						<ProductElement id={product._id} name={product.name} image={product.image} key={product._id} />
-					))}
-				</Fragment>
-			))}
-		</div>
+				{productsQuery.data?.pages.map((group, index) => (
+					<Fragment key={index}>
+						{group.map((product) => (
+							<ProductElement id={product._id} name={product.name} image={product.image} key={product._id} />
+						))}
+					</Fragment>
+				))}
+			</div>
 
-		{(productsQuery?.fetchStatus === 'fetching' || productsQuery?.status === 'loading') && (
-			<Loader />
-		)}
+			{(productsQuery?.fetchStatus === 'fetching' || productsQuery?.status === 'loading') && (
+				<Loader />
+			)}
 
-		<div className='mt-5 flex justify-center'>
-			<Button
-				text= "Load More"
-				desc="Load more products"
-				onClickHandler={() => productsQuery.fetchNextPage()}
-				disabled={!productsQuery.hasNextPage || productsQuery.isFetchingNextPage}
-			/>
-		</div>
+			<div className='mt-5 flex justify-center'>
+				<Button
+					text= "Load More"
+					desc="Load more products"
+					onClickHandler={() => productsQuery.fetchNextPage()}
+					disabled={!productsQuery.hasNextPage || productsQuery.isFetchingNextPage}
+				/>
+			</div>
 
 		</div>
 	)

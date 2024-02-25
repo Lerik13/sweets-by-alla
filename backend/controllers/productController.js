@@ -17,6 +17,14 @@ const getProducts = asyncHandler(async (req, res) => {
 	const pageLimit = Number(process.env.PAGINATION_LIMIT) // pagination: how many products show in 1 page
 	const page = Number(req.query.page) || 1;
 	const category = req.query?.category || "";
+	let sortBy = 'category order';
+	if (req.query?.sortBy) {
+		switch (req.query?.sortBy) {
+			case 'order': sortBy = 'category order'; break;
+			case 'name': sortBy = 'name'; break;
+			case 'id': sortBy = '_id'; break;
+		}
+	}
 
 	const keyword = req.query.keyword
 		? { name: { $regex: req.query.keyword, $options: 'i' } }
@@ -28,6 +36,7 @@ const getProducts = asyncHandler(async (req, res) => {
 		count = await Product.countDocuments({...keyword});
 
 		const products = await Product.find({...keyword})
+			.sort(sortBy)
 			.limit(pageLimit)
 			.skip(pageLimit * (page - 1));
 		res.json(products);
@@ -36,6 +45,7 @@ const getProducts = asyncHandler(async (req, res) => {
 		count = await Product.countDocuments({ category: category, ...keyword });
 	
 		const products = await Product.find({ category: category, ...keyword })
+			.sort(sortBy)
 			.limit(pageLimit)
 			.skip(pageLimit * (page - 1));
 		res.json(products);
@@ -68,7 +78,8 @@ const createProduct = asyncHandler(async (req, res) => {
 		images: [],
 		category: 'cake',
 		description: 'write down your description please...',
-		ingredients: 'salt, sugar, flour, add more...'
+		ingredients: 'salt, sugar, flour, add more...',
+		order: '99'
 	});
 
 	const createdProduct = await product.save();

@@ -1,5 +1,5 @@
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
-import { getProducts, getCategories } from "./api";
+import { getProductDetails, getProducts, getCategories } from "./api";
 import { client } from "./store";
 
 export const useCategories = () => {
@@ -35,11 +35,11 @@ export function useProductsForCatalog(category) {
 	);
 }
 
-export function useProductsForSearch(category, keyword) {
+export function useProductsForSearch(category, keyword, sortBy) {
 	return useInfiniteQuery(
 		{
-			queryKey: ["products", category, keyword],
-			queryFn: ({ pageParam = 1 }) => getProducts(pageParam, category, keyword),
+			queryKey: ["products", category, keyword, sortBy],
+			queryFn: ({ pageParam = 1 }) => getProducts(pageParam, category, keyword, sortBy),
 			initialPageParam: 0,
 			getNextPageParam: (lastPage, _, lastPageParam) => {
 				if (lastPage.length === 0) {
@@ -58,3 +58,24 @@ export function useProductsForSearch(category, keyword) {
 	);
 }
 
+export function useProduct(id) {
+	//const queryClient = useQueryClient();
+
+	return useQuery(
+		{
+			queryKey: ["product", { id }],
+			queryFn: () => getProductDetails(id),
+			enabled: !!id,
+			placeholderData: () => {
+				const cachedProducts = (
+					client.getQueryData(["products"])
+				)?.pages?.flat(2);
+
+				if (cachedProducts) {
+					return cachedProducts.find((item) => item.id === id);
+				}
+			},
+		},
+		client
+	);
+}

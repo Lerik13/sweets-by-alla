@@ -1,0 +1,27 @@
+.btn-close {
+	position: fixed;
+	cursor: pointer;
+	width: 40px;
+	height: 40px;
+	top: 50%;
+	left: 16px;
+	z-index: 50;
+	border-radius: 50%;
+}
+
+.btn-close-left,
+.btn-close-right {
+	position: absolute;
+	top: 12px;
+	left: 8px;
+	width: 24px;
+	height: 2px;
+	background: var(--bgColor);
+}
+
+.btn-close-left {
+	transform: rotate(45deg) translateY(6px) translate(6px);
+}
+.btn-close-right {
+	transform: rotate(-45deg) translateY(6px) translate(-6px);
+}

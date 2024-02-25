@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { login } from "./api";
+import { login, logout } from "./api";
 import { client, userInfo } from "./store";
 
 export function useLogin() {
@@ -18,6 +18,21 @@ export function useLogin() {
 			onSuccess: ({ data }) => {
 				userInfo.set(data);
 				localStorage.setItem('userInfo', JSON.stringify(data))
+			},
+		},
+		client
+	);
+}
+
+export function useLogout() {
+
+	return useMutation(
+		{
+			mutationFn: () => logout(),
+
+			onSuccess: () => {
+				userInfo.set(null);
+				localStorage.clear();
 			},
 		},
 		client

@@ -1,0 +1,74 @@
+---
+//import { Image } from "astro:assets";
+import LogoutLink from './LogoutLink';
+
+const url = String(Astro.request.url)
+const activeLink = url.substring(url.lastIndexOf('/')+1, url.length)
+
+interface Props { isAdmin?: boolean; }
+const { isAdmin = false } = Astro.props as Props;
+---
+
+<nav class="relative lg:container mx-auto p-6">
+	<!-- Flex container -->
+	<div class="flex items-center justify-between">
+		<!-- Logo -->
+		<!--a href="/" class="flex justify-center" aria-label="Go to main page">
+			<Image src="/logo2.svg" alt="Logo" width={180} height={50} />
+		</!--a>
+
+		<!-- Menu Items -->
+		<ul class="hidden md:flex space-x-6 lg:space-x-10 pl-2 font-medium">
+			<li><a href="/#home" aria-label="main page" class="nav-a hover:text-brightRed">Home</a></li>
+			<li><a href="/admin/products" aria-label="products" class="nav-a pb-2 border-b-2 border-bgColor hover:border-brightRed duration-500 ease-out transition-all">Products</a></li>
+			<li><a href="/admin/categories" aria-label="categories" class="nav-a pb-2 border-b-2 border-bgColor hover:border-brightRed duration-500 ease-out transition-all">Categories</a></li>
+			<li><a href="/admin/hero-blocks" aria-label="hero-blocks" class="nav-a pb-2 border-b-2 border-bgColor hover:border-brightRed duration-500 ease-out transition-all">Hero Block</a></li>
+			<li><a href="/admin/reviews" aria-label="reviews" class="nav-a pb-2 border-b-2 border-bgColor hover:border-brightRed duration-500 ease-out transition-all">Reviews</a></li>
+			{(isAdmin) && (
+				<li><a href="/admin/users" aria-label="users" class="nav-a pb-2 border-b-2 border-bgColor hover:border-brightRed duration-500 ease-out transition-all">Users</a></li>
+			)}
+			<li>
+				<LogoutLink client:load />
+			</li>
+		</ul>
+
+
+		<!-- Hamburger Icon -->
+		<button id="menu-btn" aria-label="Open navigation menu" class="hamburger block md:hidden focus:outline-none">
+			<span class="hamburger-top"></span>
+			<span class="hamburger-middle"></span>
+			<span class="hamburger-bottom"></span>
+		</button>
+
+		<!-- Mobile Menu -->
+		<div id="slideover-container" class="fixed inset-0 w-full h-full invisible z-10">
+			<div id="slideover-bg"class="absolute inset-0 w-full h-full bg-navColor opacity-0 z-0 duration-500 ease-out transition-all"></div>
+
+			<div id="slideover"class="absolute w-64 h-full flex flex-col justify-between px-5 pt-20 space-y-10 bg-bgColor top-0 right-0 translate-x-full duration-500 ease-out transition-all overflow-scroll">
+				<ul class="font-medium flex flex-col items-center space-y-10">
+					<li><a href="/#home" aria-label="main page" class="nav-link hover:text-brightRed">Home</a></li>
+					<li><a href="/admin/products" aria-label="products" class="nav-link pb-2 border-b-2 border-bgColor hover:border-brightRed duration-500 ease-out transition-all">Products</a></li>
+					<li><a href="/admin/categories" aria-label="categories" class="nav-link pb-2 border-b-2 border-bgColor hover:border-brightRed duration-500 ease-out transition-all">Categories</a></li>
+					<li><a href="/admin/hero-blocks" aria-label="hero-blocks" class="nav-link pb-2 border-b-2 border-bgColor hover:border-brightRed duration-500 ease-out transition-all">Hero Block</a></li>
+					<li><a href="/admin/reviews" aria-label="reviews" class="nav-link pb-2 border-b-2 border-bgColor hover:border-brightRed duration-500 ease-out transition-all">Reviews</a></li>
+					<li>
+						<LogoutLink client:load />
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</nav>
+
+<script>
+	import "../../js/nav.js";
+</script>
+
+<script define:vars={{ activeLink }}>
+	document.querySelectorAll('.nav-a').forEach(n => {
+		if (n.getAttribute('aria-label') === activeLink) {
+			n.classList.add('text-brightRed','border-brightRed')
+		}
+	})
+	
+</script>

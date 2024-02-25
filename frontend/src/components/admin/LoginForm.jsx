@@ -14,7 +14,7 @@ const LoginForm = () => {
 	useEffect(() => {
 		if (isLoggedIn()) {
 			if (window) {
-				window.location.href = "/admin";
+				window.location.href = "/admin/products";
 			}
 		}
 		inputRef.current.focus();
@@ -27,7 +27,7 @@ const LoginForm = () => {
 
 		if (loginMutation.isSuccess) {
 			if (window) {
-				window.location.href = "/admin";
+				window.location.href = "/admin/products";
 			}
 		}
 	}, [loginMutation.status])
@@ -35,7 +35,6 @@ const LoginForm = () => {
 
 	const submitHandler = (e) => {
 		e.preventDefault();
-	
 		loginMutation.mutate({ email, password });
 	}
 
@@ -50,7 +49,7 @@ const LoginForm = () => {
 		<form
 			name="form-login"
 			id="form-login"
-			className="mt-6"
+			className="form-main mt-6"
 			onSubmit={submitHandler}
 		>
 			<div className="input-wrapper">

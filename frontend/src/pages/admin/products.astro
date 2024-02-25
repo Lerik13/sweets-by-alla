@@ -1,0 +1,14 @@
+---
+import AdminLayout from '../../layouts/AdminLayout.astro';
+import ProductList from '../../components/admin/ProductList';
+import ProductCard from '../../components/admin/ProductCard';
+---
+<AdminLayout>
+	<div class="container flex flex-col space-y-10 md:space-y-12 mx-auto mt-10">
+		<h1 class="font-serif text-5xl md:text-6xl pr-2 flex justify-center text-center">
+			Sweet Products
+		</h1>
+	
+		<ProductList client:load />
+	</div>
+</AdminLayout>
